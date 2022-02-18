@@ -1,4 +1,10 @@
+from abc import ABC
 from dataclasses import dataclass
+
+
+@dataclass
+class LearningEnvCredentials(ABC):
+    pass
 
 
 @dataclass
