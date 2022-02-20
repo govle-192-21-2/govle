@@ -1,2 +1,8 @@
 # Google Cloud API credentials
-credentials.json
+*.json
+
+# Python
+**/__pycache__
+
+# macOS
+**/.DS_Store
