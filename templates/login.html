@@ -1,9 +1,29 @@
 {% extends "base.html" %}
 
+{% block head %}
+<style type="text/css">
+    #login-form {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="text-center">
-    <form>
-        <h3 class="mb-3">Log in to GoVLê</h3>
-    </form>
+<div id="login-form">
+    <div class="text-center">
+        <form>
+            <h3 class="mb-3">Log in to GoVLê</h3>
+            <button class="btn btn-lg btn-success">Log in with Google</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
