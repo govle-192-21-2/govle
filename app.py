@@ -1,6 +1,12 @@
-# Main application file for GoVLê REST API.
+# Main application file for GoVLê
 from flask import Flask
-from flask_restful import Api
+from views import *
 
 app = Flask(__name__)
-api = Api(app)
+
+# Routes
+app.register_blueprint(index_blueprint)
+
+# Run app
+if __name__ == '__main__':
+    app.run(debug=True)

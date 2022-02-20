@@ -5,7 +5,7 @@ from models.credentials import GoogleCredentials, MoodleCredentials
 
 
 @dataclass
-class Profile(ABC):
+class User(ABC):
     # User name
     name: str
 
