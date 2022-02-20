@@ -1,11 +1,10 @@
-from abc import ABC
 from dataclasses import dataclass
+from flask_login import UserMixin
 from typing import List
 from models.credentials import GoogleCredentials, MoodleCredentials
 
-
 @dataclass
-class User(ABC):
+class Profile(UserMixin):
     # User name
     name: str
 
