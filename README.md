@@ -1,6 +1,6 @@
-# backend
+# govle
 
-Backend REST API for the GoVLê project, an integration hub for various remote learning platforms.
+Repository for the GoVLê project, an integration hub for online learning platforms.
 
 ## Requirements
 
