@@ -34,29 +34,39 @@
         height: 1px;
         background-color: #888;
     }
+
+    #login-form .login-form {
+        width: 100%;
+        max-width: 350px;
+        padding: 1rem;
+        margin: auto;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-<div id="login-form">
-    <div>
+<div class="row" id="login-form">
+    <div class="login-form">
         <h3 class="mb-3">Log in to GoVLê</h3>
         <div class="google-signin">
             <div id="g_id_onload"
                 data-client_id="{{ google_client_id }}"
                 data-login_uri="{{ domain }}/login"
-                data-auto_prompt="true">
+                data-auto_prompt="true"
+                data-context="signin"
+                data-ux_mode="popup"
+                data-auto_select="true">
             </div>
             <div class="g_id_signin"
                 data-type="standard"
                 data-size="large"
                 data-theme="outline"
-                data-text="sign_in_with"
+                data-text="signin_with"
                 data-shape="rectangular"
                 data-logo_alignment="left">
             </div>
         </div>
-        <form>
+        <form method="post" action="{{ url_for('login.login_page') }}">
             <div class="divider">
                 <div class="line"></div>
                 <span class="divider-text">or</span>
@@ -64,20 +74,17 @@
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">E-mail address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                    else.</small>
+                <input type="email" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
             </div>
-            <button type="submit" class="btn btn-lg btn-primary btn-block">Log in</button>
+            <button type="submit" class="btn btn-primary btn-block">Log in</button>
         </form>
         <br>
-        <button type="button" class="btn btn-lg btn-block btn-outline-dark">Register</button>
-        <br>
-        <button type="button" class="btn btn-lg btn-block btn-link">Forgot password?</button>
+        <a href="{{ url_for('register.register_page') }}" role="button" class="btn btn-block">Create account</a>
+        <a href="#" role="button" class="btn btn-block btn-error">Forgot password?</a>
     </div>
 </div>
 {% endblock %}

@@ -1,5 +1,5 @@
 # Main application file for GoVLê
-from controllers.database import load_user
+from controllers.database import Database
 from dotenv import load_dotenv
 from firebase_admin import credentials, db
 from flask import Flask
@@ -33,12 +33,12 @@ cred = credentials.Certificate('credentials.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL': environ['FIREBASE_DATABASE_URL']
 })
+app.config['DB'] = Database(db.reference())
 
 # User loader
 @login_manager.user_loader
 def user_loader(user_id: str) -> Profile:
-    ref = db.reference('users')
-    return load_user(ref, user_id)
+    return app.config['DB'].lookup_user_by_id(user_id)
 
 # Routes
 app.register_blueprint(index_blueprint)

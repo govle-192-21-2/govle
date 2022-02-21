@@ -14,18 +14,3 @@ def hash_password(password: str) -> Tuple[str, str]:
     salt = urandom(32)
     hashed = pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
     return hashed.hex(), salt.hex()
-
-
-def check_password(password: str, hashed: str, salt: str) -> bool:
-    """
-    Checks if a given password matches a given salted and hashed password.
-
-    :param password: Password to be checked
-    :param hashed: Hashed password (byte array encoded as hex string)
-    :param salt: Salt (byte array encoded as hex string)
-    :return: True if password matches, False otherwise
-    """
-
-    salt_bytes = bytes.fromhex(salt)
-    password_hashed = pbkdf2_hmac('sha256', password.encode('utf-8'), salt_bytes, 100000)
-    return password_hashed.hex() == hashed

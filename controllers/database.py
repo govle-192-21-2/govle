@@ -1,29 +1,59 @@
 from firebase_admin.db import Reference
 from models.credentials import GoogleCredentials, MoodleCredentials
 from models.profile import Profile
+from typing import Dict, Optional
 
-def load_user(ref: Reference, user_id: str) -> Profile:
-    """
-    Loads a user from the database and returns a Profile instance.
-    For use with Flask-Login.
 
-    :param ref: Firebase DB reference object
-    :param user_id: User ID (string)
-    :return: Profile instance
-    """
-    loaded_user = ref.child(user_id).get()
-
+def __reconstruct_user_from_db(user_data: Dict) -> Profile:
     # Reconstruct credentials dataclasses
-    google_accounts = [GoogleCredentials(**account) for account in loaded_user['google_accounts']]
-    moodle_account = MoodleCredentials(**loaded_user['moodle_account'])
+    google_accounts = [GoogleCredentials(**account) for account in user_data['google_accounts']]
+    moodle_account = MoodleCredentials(**user_data['moodle_account'])
 
     return Profile(
-        user_id=user_id,
-        name=loaded_user['name'],
-        email=loaded_user['email'],
-        hashed_password=loaded_user['hashed_password'],
-        salt=loaded_user['salt'],
-        picture=loaded_user['picture'],
+        user_id=user_data['user_id'],
+        name=user_data['name'],
+        email=user_data['email'],
+        hashed_password=user_data['hashed_password'],
+        salt=user_data['salt'],
+        picture=user_data['picture'],
         google_accounts=google_accounts,
         moodle_account=moodle_account
     )
+
+
+class Database():
+    def __init__(self, ref: Reference):
+        self.root: Reference = ref
+    
+    def create_user(self, user: Profile):
+        pass
+    
+    def lookup_user_by_email(self, email: str) -> Optional[Profile]:
+        """
+        Looks up a user by email and returns a Profile instance.
+
+        :param email: User email
+        :return: User ID string
+        """
+        users = self.root.child('users').get()
+        if not users:
+            return None
+
+        for _, user in users.items():
+            if user['email'] == email:
+                return __reconstruct_user_from_db(user)
+        return None
+
+    def lookup_user_by_id(self, user_id: str) -> Optional[Profile]:
+        """
+        Loads a user from the database and returns a Profile instance.
+        For use with Flask-Login.
+
+        :param ref: Firebase DB reference object
+        :param user_id: User ID (string)
+        :return: Profile instance
+        """
+        loaded_user = self.root.child(f'users/{user_id}').get()
+        if loaded_user:
+            return __reconstruct_user_from_db(loaded_user)
+        return None
