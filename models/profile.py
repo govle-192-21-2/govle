@@ -21,9 +21,6 @@ class Profile(UserMixin):
     # User password salt
     salt: str
 
-    # User profile picture URL
-    picture: str
-
     # Linked Google accounts
     google_accounts: List[GoogleCredentials]
 
