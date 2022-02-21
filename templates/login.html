@@ -44,10 +44,16 @@
         <div class="google-signin">
             <div id="g_id_onload"
                 data-client_id="{{ google_client_id }}"
-                data-login_uri="{{ domain }}/login" data-auto_prompt="false">
+                data-login_uri="{{ domain }}/login"
+                data-auto_prompt="true">
             </div>
-            <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
-                data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+            <div class="g_id_signin"
+                data-type="standard"
+                data-size="large"
+                data-theme="outline"
+                data-text="sign_in_with"
+                data-shape="rectangular"
+                data-logo_alignment="left">
             </div>
         </div>
         <form>
@@ -66,8 +72,12 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1">
             </div>
-            <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Log in</button>
         </form>
+        <br>
+        <button type="button" class="btn btn-lg btn-block btn-outline-dark">Register</button>
+        <br>
+        <button type="button" class="btn btn-lg btn-block btn-link">Forgot password?</button>
     </div>
 </div>
 {% endblock %}
