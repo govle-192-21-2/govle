@@ -14,16 +14,64 @@
         justify-content: center;
         align-items: center;
     }
+
+    #login-form .divider {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #login-form .divider .divider-text {
+        color: #888;
+        font-weight: bold;
+        font-size: 0.875rem;
+        margin: 1.5rem;
+    }
+
+    #login-form .divider .line {
+        flex: 1;
+        height: 1px;
+        background-color: #888;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 <div id="login-form">
-    <div class="text-center">
+    <div>
+        <h3 class="mb-3">Log in to GoVLê</h3>
+        <div class="google-signin">
+            <div id="g_id_onload"
+                data-client_id="{{ google_client_id }}"
+                data-login_uri="{{ domain }}/login" data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+                data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+            </div>
+        </div>
         <form>
-            <h3 class="mb-3">Log in to GoVLê</h3>
-            <button class="btn btn-lg btn-success">Log in with Google</button>
+            <div class="divider">
+                <div class="line"></div>
+                <span class="divider-text">or</span>
+                <div class="line"></div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">E-mail address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
         </form>
     </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 {% endblock %}
