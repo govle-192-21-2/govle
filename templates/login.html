@@ -3,44 +3,17 @@
 {% block head %}
 <style type="text/css">
     #login-form {
-        margin: 0;
-        padding: 0;
-        width: 100vw;
-        height: 100vh;
-        left: 0;
-        top: 0;
-        position: absolute;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #login-form .divider {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    #login-form .divider .divider-text {
-        color: #888;
-        font-weight: bold;
-        font-size: 0.875rem;
-        margin: 1.5rem;
-    }
-
-    #login-form .divider .line {
-        flex: 1;
-        height: 1px;
-        background-color: #888;
-    }
-
-    #login-form .login-form {
-        width: 100%;
-        max-width: 350px;
-        padding: 1rem;
-        margin: auto;
-    }
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 </style>
 {% endblock %}
 
@@ -66,25 +39,6 @@
                 data-logo_alignment="left">
             </div>
         </div>
-        <form method="post" action="{{ url_for('login.login_page') }}">
-            <div class="divider">
-                <div class="line"></div>
-                <span class="divider-text">or</span>
-                <div class="line"></div>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">E-mail address</label>
-                <input type="email" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" name="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Log in</button>
-        </form>
-        <br>
-        <a href="{{ url_for('register.register_page') }}" role="button" class="btn btn-block">Create account</a>
-        <a href="#" role="button" class="btn btn-block btn-error">Forgot password?</a>
     </div>
 </div>
 {% endblock %}

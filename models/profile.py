@@ -1,11 +1,9 @@
-from dataclasses import dataclass
-from flask_login import UserMixin
-from hashlib import pbkdf2_hmac
+from dataclasses import dataclass, field
 from models.credentials import GoogleCredentials, MoodleCredentials
-from typing import List
+from typing import Dict, List, Union
 
 @dataclass
-class Profile(UserMixin):
+class Profile():
     # User ID (for LoginManager)
     user_id: str
 
@@ -15,26 +13,65 @@ class Profile(UserMixin):
     # User e-mail address
     email: str
 
-    # User password, salted and hashed
-    hashed_password: str
-
-    # User password salt
-    salt: str
+    # Linked Moodle account
+    moodle_account: MoodleCredentials
 
     # Linked Google accounts
     google_accounts: List[GoogleCredentials]
 
-    # Linked Moodle account
-    moodle_account: MoodleCredentials
+    # User profile picture
+    picture: str = field(default='')
 
-    def verify_password(self, password: str) -> bool:
+    def __post_init__(self):
         """
-        Checks if a given password matches a class instance's salted and hashed password.
-
-        :param password: Password to be checked
-        :return: True if password matches, False otherwise
+        Initializes a Profile instance.
         """
+        self._is_authenticated = True
+        self._is_active = True
+        self._is_anonymous = False
+    
+    @property
+    def is_authenticated(self) -> bool:
+        """
+        Returns whether the user is authenticated or not. This is used by Flask-Login.
 
-        salt_bytes = bytes.fromhex(self.salt)
-        password_hashed = pbkdf2_hmac('sha256', password.encode('utf-8'), salt_bytes, 100000)
-        return password_hashed.hex() == self.hashed_password
+        :return: True if authenticated, False otherwise
+        """
+        return self._is_authenticated
+    
+    @property
+    def is_active(self) -> bool:
+        """
+        Returns whether the user is active or not. This is used by Flask-Login.
+
+        :return: True if active, False otherwise
+        """
+        return self._is_active
+    
+    @property
+    def is_anonymous(self) -> bool:
+        """
+        Returns whether the user is anonymous or not. This is used by Flask-Login.
+
+        :return: True if anonymous, False otherwise
+        """
+        return self._is_anonymous
+    
+    def get_id(self) -> str:
+        """
+        Returns the user ID. This is used by Flask-Login.
+
+        :return: User ID
+        """
+        return self.user_id
+
+
+def create_from_google_jwt(jwt_info: Dict[str, Union[str, int, bool]]) -> Profile:
+    return Profile(
+        user_id=jwt_info['sub'],
+        name=jwt_info['name'],
+        email=jwt_info['email'],
+        picture=jwt_info['picture'],
+        moodle_account=MoodleCredentials(),
+        google_accounts=[GoogleCredentials()]
+    )

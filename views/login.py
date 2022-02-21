@@ -1,7 +1,8 @@
-from flask import Blueprint, current_app, render_template, request, redirect, url_for
+from flask import Blueprint, current_app, render_template, request, redirect, session, url_for
 from flask_login import login_user
 from google.auth.transport import requests
 from google.oauth2 import id_token
+from models.profile import create_from_google_jwt
 from os import environ
 from urllib.parse import urljoin, urlparse
 
@@ -51,28 +52,30 @@ def login_form():
             # Could not decode JWT
             return f'Invalid JWT: {str(e)}', 400
         else:
-            # Decoded JWT successfully
-            print(id_info)
-            return 'OK'
+            # Decoded JWT successfully.
+            # Is the user verified?
+            if not id_info['email_verified']:
+                return 'Email not verified', 400
     
-    # No JWT data, so decode good old email address and password
-    email = request.form['username']
-    password = request.form['password']
-
     # Does this user exist?
+    email = id_info['email']
     db = current_app.config['DB']
     matching_user = db.lookup_user_by_email(email)
-    if not matching_user:
-        return 'No such user', 400
+    is_new_user = matching_user is None
+    if is_new_user:
+        # Is the user verified?
+        if not id_info['email_verified']:
+            return 'Email not verified', 400
+
+        # Create user
+        matching_user = create_from_google_jwt(id_info)
+        db.add_user(matching_user)
     
-    # Does the password match?
-    if not matching_user.verify_password(password):
-        return 'Invalid password', 400
-    
-    # User exists and password is correct, so log in!
+    # Log in
     login_user(matching_user)
 
     # Redirect to the next page
+    session['IS_NEW_USER'] = is_new_user
     next_url = request.args.get('next')
     if not is_safe_url(next_url):
         return 'Unsafe redirect URL', 400
