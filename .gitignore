@@ -9,3 +9,6 @@
 
 # Environment variables
 **/*.env
+
+# VS Code
+**/.vscode
