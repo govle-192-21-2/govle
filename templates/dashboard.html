@@ -1,0 +1,9 @@
+{% extends "base-logged-in.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <p>Welcome back, {{ current_user['name'] }}</p>
+    </div>
+</div>
+{% endblock %}
