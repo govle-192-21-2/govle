@@ -2,9 +2,12 @@
 
 {% block content %}
 <h1 class="title">
-  Flask Login Example
+    Welcome to GoVLê
 </h1>
 <h2 class="subtitle">
-  Easy authentication and authorization in Flask.
+    Integration hub for online learning platforms
 </h2>
+<a href="{{ url_for('login.login_page') }}"
+    role="button"
+    class="btn btn-lg btn-block btn-primary">Log in</a>
 {% endblock %}
