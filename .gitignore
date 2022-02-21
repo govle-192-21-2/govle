@@ -12,3 +12,6 @@
 
 # VS Code
 **/.vscode
+
+# Local testing 
+**/*.pem
