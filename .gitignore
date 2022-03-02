@@ -15,3 +15,6 @@
 
 # Local testing 
 **/*.pem
+
+# Virtualenv
+.virtualenv/**/*
