@@ -1,63 +1,48 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GoVl&#234;</title>
+    <link href="{{ url_for('static', filename='styles/index.css') }}" rel="stylesheet" />
+</head>
+<body>
+    <div class="head">
+        <img style="padding-top: 10px; padding-left: 10px; height: 35px"; src="{{ url_for('static', filename='images/logo-2x.png')}}">
+        <p id="logo">GoVl&#234;</p>
+        <p ></p>
+        <a id="login" href=""><u>Log in or register ↗</u></a>
+    </div>
+    <div class="body">
+        <ul>
+            <li>All your classes in one place</li>
+            <li><button>Get started</button></li>
+        </ul>
+        <img style="padding-right: 150px; height: 400px;"; id="illus" src="{{ url_for('static', filename='images/home-illus.png') }}">
 
-{% block head %}
-<style type="text/css">
-    .navbar-brand img {
-        height: 2rem;
-    }
-</style>
-{% endblock %}
-
-{% block nav %}
-<a class="navbar-brand" href="#">
-    <img src="{{ url_for('static', filename='images/logo-2x.png') }}" alt="GoVLê">
-</a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                data-toggle="dropdown" aria-expanded="false">
-                Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logout.logout_page') }}">Log out</a>
-        </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-</div>
-{% endblock %}
-
-{% block content %}
-<h1 class="title">
-    Welcome to GoVLê
-</h1>
-<h2 class="subtitle">
-    Integration hub for online learning platforms
-</h2>
-<a href="{{ url_for('login.login_page') }}"
-    role="button"
-    class="btn btn-lg btn-block btn-primary">Log in</a>
-{% endblock %}
+    </div>
+    <div class="block">
+        <table>
+            <tbody>
+                <tr id="column">
+                    <th>Lorem ipsum</th>
+                    <th>Nunc efficitur</th>
+                </tr>
+                <tr id="row">
+                    <td>dolor sit amet, consectetur 
+                        adipiscing elit. Praesent ac tempor arcu, eget pulvinar 
+                        velit. Aliquam erat volutpat. Pellentesque nulla mi, 
+                        sodales nec purus sit amet, ornare euismod dolor. 
+                        Pellentesque lobortis tortor imperdiet, volutpat quam a, 
+                        commodo orci. Fusce sit amet tincidunt turpis.
+                    <td>Lorem id libero interdum 
+                        accumsan. Sed ligula arcu, vestibulum vel nulla non, 
+                        tempor ultrices lacus. Proin facilisis ex odio. 
+                        Maecenas eu turpis non nisl efficitur volutpat ut 
+                        eleifend lectus. Nunc vel feugiat nunc, eget rhoncus 
+                        risus. Sed at bibendum dolor, eget sodales quam.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
