@@ -17,22 +17,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">  
-            {% block nav %}
-            {% endblock %}
-        </div>
-    </nav>
-
     <!-- Main content -->
-    {% if full_width == 'true' %}
-    <div class="container-fluid">
-    {% else %}
-    <div class="container">
-    {% endif %}
-        {% block content %}
-        {% endblock %}
-    </div>
+    {% block body %}
+    {% endblock %}
 
     <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
