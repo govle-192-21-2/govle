@@ -1,9 +1,10 @@
 {% extends "base-logged-in.html" %}
 
 {% block content %}
-<img class= "py-5 mx-auto" src="{{ url_for('static', filename='images/Illustration.png') }}" alt="Illustration" width="500" height="580">
+<img class="py-5 mx-auto" src="{{ url_for('static', filename='images/Illustration.png') }}" alt="Illustration"
+    width="500" height="580">
 <h1 class="mx-auto display-3 font-weight-bolder">👋 Welcome to GoVLê, {{ current_user['name'] }}</h1>
-        
+
 <h3 class="pt-3 mx-auto font-weight-normal">Link your class accounts to get started.</h3>
 
 <p class="pt-3 mx-auto">
