@@ -1,48 +1,44 @@
-{% extends "base.html" %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-{% block head %}
-<style type="text/css">
-    #login-form {
-    margin: 0;
-    padding: 0;
-    width: 100vw;
-    height: 100vh;
-    left: 0;
-    top: 0;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-</style>
-{% endblock %}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="mystyle.css">
 
-{% block content %}
-<div class="row" id="login-form">
-    <div class="login-form">
-        <h3 class="mb-3">Log in to GoVLê</h3>
-        <div class="google-signin">
-            <div id="g_id_onload"
-                data-client_id="{{ google_client_id }}"
-                data-login_uri="{{ domain }}/login"
-                data-auto_prompt="true"
-                data-context="signin"
-                data-ux_mode="popup"
-                data-auto_select="true">
+    <!-- Inter Font -->
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class = "col", style = "padding: 0; margin: 0;">
+                <img src="{{ url_for('static', filename='images/image2.PNG') }}" class="float-left" style="max-width: 100%; max-height: 100%">
             </div>
-            <div class="g_id_signin"
-                data-type="standard"
-                data-size="large"
-                data-theme="outline"
-                data-text="signin_with"
-                data-shape="rectangular"
-                data-logo_alignment="left">
+            <div class = "col-lg-6">
+                <div class = "float-center" style="padding: 48px; position: relative; width: 446px; height: 558px; left: calc(50% - 446px/2); top: calc(50% - 558px/2); background: #FFFFFF; border-radius: 5px; font-family: Inter; font-size: 18px;">
+                <img src = "{{ url_for('static', filename='Logo.png') }}" >
+                <h1 style = "margin-top: 20px; margin-bottom: 20px;"><strong>Come here often?</strong></h1>
+                <p>Whether you’re new to GoVLê or you already have an account, just click the nifty Sign In button below.</p>
+                <button type="button" class="btn btn-default" style = "border: 2px solid rgba(0, 0, 0, 0.25); align-items: center; border-radius: 87px; width: 350px; height: 42px; padding: 5px 70px 0 90px;">
+                <img src="{{ url_for('static', filename='image5.png') }}" style = "float: left; position: relative; margin-top: 5px;">
+                <p style="color: rgba(0, 0, 0, 0.54); margin-top: 2px;">Sign in to Google</p>
+                </button>
+                <p style="margin-top: 20px; margin-bottom: 20px; font-size: 14px;"><strong>Please sign in with your @up.edu.ph Google account.</strong></p>
+                
+                <p style ="font-size: 14px;">This app is in beta and is therefore limited only to a few students from the University of the Philippines Diliman.</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
-{% endblock %}
-
-{% block scripts %}
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-{% endblock %}
+  </body>
+</html>
