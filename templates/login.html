@@ -1,4 +1,15 @@
 {% extends "base.html" %}
+    
+{% block head %}
+<style type="text/css">
+#g_id_onload {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 9999;
+}
+</style>
+{% endblock %}    
 
 {% block body %}
 <div class="container-fluid">
@@ -13,14 +24,6 @@
             <h1 style = "margin-top: 20px; margin-bottom: 20px;"><strong>Come here often?</strong></h1>
             <p>Whether you're new to GoVLê or you already have an account, just click the nifty Sign In button below.</p>
             <div class="google-signin">
-                <div id="g_id_onload"
-                    data-client_id="{{ google_client_id }}"
-                    data-login_uri="{{ domain }}/login"
-                    data-auto_prompt="true"
-                    data-context="signin"
-                    data-ux_mode="popup"
-                    data-auto_select="true">
-                </div>
                 <div class="g_id_signin"
                     data-type="standard"
                     data-size="large"
@@ -36,6 +39,16 @@
             </div>
         </div>
     </div>
+</div>
+
+<div id="g_id_onload"
+    data-client_id="{{ google_client_id }}"
+    data-login_uri="{{ domain }}/login"
+    data-prompt_parent_id="g_id_onload"
+    data-auto_prompt="true"
+    data-context="signin"
+    data-ux_mode="popup"
+    data-auto_select="true">
 </div>
 {% endblock %}
 
