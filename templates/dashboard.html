@@ -1,39 +1,7 @@
 {% extends "base-logged-in.html" %}
 
 {% block content %}
-<div class="mx-0 px-0 container mw-100 d-flex flex-column">
-    <div class="topnav">                
-        <nav class="px-3 navbar navbar-expand navbar-light bg-light">
-            <a class="mx-3 navbar-brand" href="#"><img src="{{ url_for('static', filename='images/logo-2x.png') }}" alt="GoVLê"></a>
-            
-            <div class="p-0 container-fluid">
-                <ul class="navbar-nav ml-auto">
-
-                    <li class="nav-item">
-                        <a class="nav-link h5" href="#">Home</a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link h5" href="#">Classes</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link h5" href="#">Calendar</a>
-                    </li>
-                </ul>
-            </div>                                        
-            
-            <div class="mx-5 px-5 dropdown">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"></button>
-                <div class="mr-5 dropdown-menu dropdown-menu-right text-right">
-                    <a class="dropdown-item" type="button" href="#">Settings</a>
-                    <a class="dropdown-item" type="button" href="#">About GoVlê</a>
-                    <a class="dropdown-item" type="button" href="#">Log out</a>
-                </div>
-            </div>
-        </nav>
-    </div>
-
+<div class="mx-0 px-0 container mw-100 d-flex flex-column"
     <img class= "py-5 mx-auto" src="{{ url_for('static', filename='images/Illustration.png') }}" alt="Illustration" width="500" height="580">
     <h1 class="mx-auto display-3 font-weight-bolder">👋 Welcome to GoVlê, {{ current_user['name'] }}</h1>
             
@@ -43,6 +11,5 @@
         <a class="btn btn-primary btn-lg" href="#" role="button">Link Google Classroom ↗</a>
         <a class="btn btn-primary btn-lg" href="#" role="button">Link UVLê ↗</a>
     </p>
-
 </div>
 {% endblock %}
