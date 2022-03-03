@@ -1,15 +1,13 @@
 {% extends "base-logged-in.html" %}
 
 {% block content %}
-<div class="mx-0 px-0 container mw-100 d-flex flex-column"
-    <img class= "py-5 mx-auto" src="{{ url_for('static', filename='images/Illustration.png') }}" alt="Illustration" width="500" height="580">
-    <h1 class="mx-auto display-3 font-weight-bolder">👋 Welcome to GoVlê, {{ current_user['name'] }}</h1>
-            
-    <h3 class="pt-3 mx-auto font-weight-normal">Link your class accounts to get started.</h3>
+<img class= "py-5 mx-auto" src="{{ url_for('static', filename='images/Illustration.png') }}" alt="Illustration" width="500" height="580">
+<h1 class="mx-auto display-3 font-weight-bolder">👋 Welcome to GoVLê, {{ current_user['name'] }}</h1>
+        
+<h3 class="pt-3 mx-auto font-weight-normal">Link your class accounts to get started.</h3>
 
-    <p class="pt-3 mx-auto">
-        <a class="btn btn-primary btn-lg" href="#" role="button">Link Google Classroom ↗</a>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Link UVLê ↗</a>
-    </p>
-</div>
+<p class="pt-3 mx-auto">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Link Google Classroom ↗</a>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Link UVLê ↗</a>
+</p>
 {% endblock %}
