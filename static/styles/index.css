@@ -1,8 +1,6 @@
 * {
-    border: 1px solid red;
     font-family: 'Inter', sans-serif;
-    /* background-color: #E5E5E5; */
-  }
+}
 .head{
     display: flex;
 }
