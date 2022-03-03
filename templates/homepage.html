@@ -14,7 +14,7 @@
 <div class="body">
     <ul>
         <li>All your classes in one place</li>
-        <li><button>Get started</button></li>
+        <li><a href="{{ url_for('login.login_page') }}" role="button" class="btn btn-lg btn-success">Get started</a></li>
     </ul>
     <img style="padding-right: 150px; height: 400px;" id="illus" src="{{ url_for('static', filename='images/home-illus.png') }}">
 
