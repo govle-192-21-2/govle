@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+{% block head %}
+<style type="text/css">
+nav .navbar-brand > img {
+    height: 2rem;
+    width: auto;
+}
+</style>
+{% endblock %}
+
 {% block body %}
 <nav class="px-3 navbar navbar-expand navbar-light bg-light">
     <a class="mx-3 navbar-brand" href="#">
@@ -33,7 +42,7 @@
 {% if full_width == 'true' %}
 <div class="container-fluid">
 {% else %}
-<div class="container">
+<div class="container mx-0 px-0 mw-100 d-flex flex-column">
 {% endif %}
     {% block content %}
     {% endblock %}
