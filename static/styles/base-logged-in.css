@@ -1,0 +1,8 @@
+nav {
+    border-bottom: 1px solid #eee;
+}
+nav .navbar-brand > img {
+    height: 2rem;
+    width: auto;
+    filter: saturate(0);
+}

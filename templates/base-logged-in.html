@@ -1,41 +1,37 @@
 {% extends "base.html" %}
 
 {% block head %}
-<style type="text/css">
-nav .navbar-brand > img {
-    height: 2rem;
-    width: auto;
-}
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/base-logged-in.css') }}">
 {% endblock %}
 
 {% block body %}
-<nav class="px-3 navbar navbar-expand navbar-light bg-light">
+<nav class="px-3 navbar navbar-expand-lg navbar-light">
     <a class="mx-3 navbar-brand" href="#">
         <img src="{{ url_for('static', filename='images/logo-2x.png') }}" alt="GoVLê">
     </a>
-    
-    <div class="p-0 container-fluid">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar-content">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link h5" href="#">Home</a>
+            <li class="nav-item {% if active_nav == 'home' %}active{% endif %}">
+                <a class="nav-link" href="#">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link h5" href="#">Classes</a>
+            <li class="nav-item {% if active_nav == 'classes' %}active{% endif %}">
+                <a class="nav-link" href="#">Classes</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link h5" href="#">Calendar</a>
+            <li class="nav-item {% if active_nav == 'calendar' %}active{% endif %}">
+                <a class="nav-link" href="#">Calendar</a>
+            </li>
+            <li class="nav-item dropdown">
+                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"></button>
+                <div class="mr-5 dropdown-menu dropdown-menu-right text-right">
+                    <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item" href="#">About GoVLê</a>
+                    <a class="dropdown-item" href="{{ url_for('logout.logout_page') }}">Log out</a>
+                </div>
             </li>
         </ul>
-    </div>                                        
-    
-    <div class="mx-5 px-5 dropdown">
-        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"></button>
-        <div class="mr-5 dropdown-menu dropdown-menu-right text-right">
-            <a class="dropdown-item" type="button" href="#">Settings</a>
-            <a class="dropdown-item" type="button" href="#">About GoVlê</a>
-            <a class="dropdown-item" type="button" href="{{ url_for('logout.logout_page') }}">Log out</a>
-        </div>
     </div>
 </nav>
 
