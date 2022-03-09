@@ -16,14 +16,14 @@ load_dotenv()
 app = Flask(__name__)
 
 # Authentication
-if not 'FLASK_SECRET_KEY' in environ:
+if 'FLASK_SECRET_KEY' not in environ:
     raise RuntimeError('FLASK_SECRET_KEY environment variable not set')
 app.secret_key = environ['FLASK_SECRET_KEY']
 login_manager = LoginManager()
 login_manager.init_app(app)
 
 # Firebase: Database URL is required
-if not 'FIREBASE_DATABASE_URL' in environ:
+if 'FIREBASE_DATABASE_URL' not in environ:
     raise RuntimeError('FIREBASE_DATABASE_URL environment variable not set')
 
 # Firebase: Parse credentials.json (not in tree, must be supplied)
