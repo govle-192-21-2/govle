@@ -22,7 +22,7 @@ def _reconstruct_user_from_db(user_data: Dict) -> Profile:
     )
 
 
-class Database():
+class Database:
     def __init__(self, ref: Reference):
         self.root: Reference = ref
     
@@ -61,3 +61,27 @@ class Database():
         if loaded_user:
             return _reconstruct_user_from_db(loaded_user)
         return None
+
+    def update_user_google_creds(self, user_id: str, creds: GoogleCredentials):
+        """
+        Updates a user's Google credentials.
+
+        :param user_id: User ID (string)
+        :param creds: GoogleCredentials instance
+        """
+        # Don't do anything if user does not exist
+        user = self.lookup_user_by_id(user_id)
+        if not user:
+            raise ValueError(f'User {user_id} does not exist')
+
+        # Check if the user has an account already linked
+        # User objects in DB are always created with a single GoogleCredentials instance
+        # with empty fields, so it suffices to check whether len(_accounts) == 1
+        # and accounts[0].access_token == ''.
+        accounts = user.google_accounts
+        if not accounts or len(accounts) == 0 or (len(accounts) == 1 and accounts[0].access_token == ''):
+            # Replace the empty account with the new one
+            self.root.child(f'users/{user_id}/google_accounts').set([asdict(creds)])
+        else:
+            # Add the new account to the existing list
+            self.root.child(f'users/{user_id}/google_accounts').push(asdict(creds))
