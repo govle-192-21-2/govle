@@ -88,7 +88,7 @@ def login_form():
     login_user(matching_user)
 
     # Redirect to the next page
-    session['IS_NEW_USER'] = is_new_user
+    session['IS_NEW_USER'] = str(is_new_user)
     next_url = request.args.get('next')
     if not is_safe_url(next_url):
         return 'Unsafe redirect URL', 400
