@@ -13,6 +13,9 @@
 # VS Code
 **/.vscode
 
+# IntelliJ IDEA
+**/.idea
+
 # Local testing 
 **/*.pem
 
