@@ -4,15 +4,40 @@
 &#8212; Home
 {% endblock %}
 
+{% block local_style %}
+<style>
+    #welcome-illustration {
+        max-height: 400px;
+    }
+
+    @media (max-width: 768px) {
+        #welcome-illustration {
+            max-height: 200px;
+        }
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<img class="py-5 mx-auto" src="{{ url_for('static', filename='images/Illustration.png') }}" alt="Illustration"
-    width="500" height="580">
-<h1 class="mx-auto display-3 font-weight-bolder">👋 Welcome to GoVLê, {{ current_user['name'] }}</h1>
-
-<h3 class="pt-3 mx-auto font-weight-normal">Link your class accounts to get started.</h3>
-
-<p class="pt-3 mx-auto">
-    <a class="btn btn-primary btn-lg" href="#" role="button">Link Google Classroom ↗</a>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Link UVLê ↗</a>
-</p>
+<div class="row">
+    <div class="col">
+        <div class="text-center">
+            <img class="img-fluid mb-4" id="welcome-illustration"
+                 src="{{ url_for('static', filename='images/Illustration.png') }}"
+                 alt="Illustration">
+            <h1 class="mx-auto">👋 Welcome to GoVLê, {{ current_user['name'] }}</h1>
+            <p class="mx-auto">Link your class accounts to get started.</p>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center my-3">
+    <div class="col-6">
+        <a class="btn btn-primary btn-block" href="#" role="button">Link Google Classroom ↗</a>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-6">
+        <a class="btn btn-primary btn-block" href="#" role="button">Link UVLê ↗</a>
+    </div>
+</div>
 {% endblock %}
