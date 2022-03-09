@@ -47,6 +47,7 @@ def unauthorized_handler():
 
 # Routes
 app.register_blueprint(index_blueprint)
+app.register_blueprint(link_google_blueprint)
 app.register_blueprint(login_blueprint)
 app.register_blueprint(logout_blueprint)
 app.register_blueprint(dashboard_blueprint)
