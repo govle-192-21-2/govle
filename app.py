@@ -2,7 +2,7 @@
 from controllers.database import Database
 from dotenv import load_dotenv
 from firebase_admin import credentials, db
-from flask import Flask
+from flask import Flask, redirect, request, url_for
 from flask_login import LoginManager
 from models.profile import Profile
 from os import environ
@@ -39,6 +39,11 @@ app.config['DB'] = Database(db.reference())
 @login_manager.user_loader
 def user_loader(user_id: str) -> Profile:
     return app.config['DB'].lookup_user_by_id(user_id)
+
+# Unauthorized error handler
+@login_manager.unauthorized_handler
+def unauthorized_handler():
+    return redirect(url_for('login.login_page') + '?next=' + request.path)
 
 # Routes
 app.register_blueprint(index_blueprint)
