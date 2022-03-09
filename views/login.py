@@ -1,5 +1,5 @@
 from flask import Blueprint, current_app, render_template, request, redirect, session, url_for
-from flask_login import login_user
+from flask_login import current_user, login_user
 from google.auth.transport import requests
 from google.oauth2 import id_token
 from models.profile import create_from_google_jwt
@@ -8,6 +8,7 @@ from urllib.parse import urljoin, urlparse
 
 login = Blueprint('login', __name__, template_folder='templates')
 
+
 # https://stackoverflow.com/a/61446498
 def is_safe_url(target):
     ref_url = urlparse(request.host_url)
@@ -15,18 +16,26 @@ def is_safe_url(target):
     return test_url.scheme in ('http', 'https') and \
            ref_url.netloc == test_url.netloc
 
+
 @login.route('/login', methods=['GET'])
 def login_page():
-    if not 'DOMAIN' in environ:
+    # Make sure that required environment variables are set
+    if 'DOMAIN' not in environ:
         raise RuntimeError('DOMAIN environment variable not set')
-    if not 'GOOGLE_CLIENT_ID' in environ:
+    if 'GOOGLE_CLIENT_ID' not in environ:
         raise RuntimeError('GOOGLE_CLIENT_ID environment variable not set')
+
+    # Redirect to dashboard if already logged in
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard.dashboard_page'))
+
     return render_template(
         'login.html',
         full_width='true',
         domain=environ['DOMAIN'],
         google_client_id=environ['GOOGLE_CLIENT_ID']
     )
+
 
 @login.route('/login', methods=['POST'])
 def login_form():
@@ -56,7 +65,7 @@ def login_form():
             # Is the user verified?
             if not id_info['email_verified']:
                 return 'Email not verified', 400
-    
+
     # Does this user exist?
     email = id_info['email']
     db = current_app.config['DB']
@@ -70,7 +79,7 @@ def login_form():
         # Create user
         matching_user = create_from_google_jwt(id_info)
         db.add_user(matching_user)
-    
+
     # Log in
     login_user(matching_user)
 
