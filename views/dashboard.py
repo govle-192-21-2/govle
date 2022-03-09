@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, session
-from flask_login import login_required
+from flask import Blueprint, render_template, request, session
+from flask_login import current_user, login_required
 
 dashboard = Blueprint('dashboard', __name__, template_folder='templates')
 
@@ -11,5 +11,23 @@ def dashboard_page():
         # User is new, show new user dashboard
         return render_template('dashboard-new-user.html', active_nav='home')
 
+    # Does the current user have complete linked accounts?
+    incomplete_moodle = current_user.moodle_account.password == ''
+    current_user_google = current_user.google_accounts
+    incomplete_google = len(current_user_google) == 0 or current_user_google[0].access_token == ''
+
+    # Check if we are returning from account linking process
+    if 'link_type' in session:
+        # User is returning from account linking process
+        return render_template('dashboard.html',
+                               active_nav='home',
+                               link_type=session['link_type'],
+                               link_status=session['link_status'],
+                               incomplete_google=incomplete_google,
+                               incomplete_moodle=incomplete_moodle)
+
     # User is returning, show normal dashboard
-    return render_template('dashboard.html', active_nav='home')
+    return render_template('dashboard.html',
+                           active_nav='home',
+                           incomplete_google=incomplete_google,
+                           incomplete_moodle=incomplete_moodle)

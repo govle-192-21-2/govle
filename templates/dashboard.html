@@ -5,11 +5,79 @@
 {% endblock %}
 
 {% block content %}
+{% if link_status != 'failure' %}
 <div class="row">
     <div class="col">
         <div class="text-center">
-            <h1 class="mx-auto">Welcome back to GoVLê, {{ current_user['name'] }}</h1>
+            <h1 class="mx-auto pb-5">Good afternoon,<br>{{ current_user['name'] }}</h1>
         </div>
     </div>
 </div>
+{% endif %}
+
+{# Account linking message #}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-6">
+{% if link_status == 'success' %}
+        <div class="alert alert-success text-center">
+            <strong>Success!</strong> Your
+            {% if link_type == 'google' %}Google
+            {% elif link_type == 'moodle' %}UVL&#234;
+            {% endif %}
+            account has been linked.
+        </div>
+{% elif link_status == 'failure' %}
+        <div class="alert alert-danger text-center">
+            <h4>There was an error linking your account</h4>
+            <p class="mb-0">
+            {% if link_type == 'google' %}
+                Could not link your Google Classroom account. Please deauthorize GoVL&#234; under
+                <strong>Third-party apps with account access</strong> at
+                <a href="https://myaccount.google.com/permissions" target="_blank">Google My Account</a>
+                before attempting to link again.
+            {% elif link_type == 'moodle' %}
+                Could not link your UVL&#234; account. Please check your username and password and try again.
+            {% endif %}
+            </p>
+        </div>
+{% endif %}
+    </div>
+</div>
+
+{# Unlinked accounts message #}
+{% if incomplete_moodle == True or incomplete_google == True %}
+<div class="row justify-content-center">
+    <div class="col-12 col-md-6">
+        <h4>Link your class accounts</h4>
+        <p>
+            GoVL&#234; works best with all your accounts working together.<br>
+            Please link your accounts to continue.
+        </p>
+        {% if incomplete_google == True %}
+        <p>
+            <a href="{{ url_for('link-google.link_google_page') }}"
+               class="btn btn-primary">
+                Link Google Classroom &#8599;
+            </a>
+        </p>
+        {% else %}
+        <div class="alert alert-success">
+            <p>Google Classroom linked</p>
+        </div>
+        {% endif %}
+        {% if incomplete_moodle == True %}
+        <p>
+            <a href="#"
+               class="btn btn-primary">
+                Link UVL&#234; &#8599;
+            </a>
+        </p>
+        {% else %}
+        <div class="alert alert-success">
+            <p>UVL&#234; linked</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
 {% endblock %}
