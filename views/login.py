@@ -42,29 +42,33 @@ def login_form():
     # If the POSTed form data has the "g_csrf_token" field,
     # then we assume the login was with a Google account
     # and the form data contains a JWT token we should verify.
-    if 'g_csrf_token' in request.form:
-        # First check if the CSRF token checks out...
-        csrf_cookie = request.cookies.get('g_csrf_token')
-        if not csrf_cookie:
-            return 'CSRF token missing', 400
-        if csrf_cookie != request.form['g_csrf_token']:
-            return 'CSRF token mismatch', 400
+    if 'g_csrf_token' not in request.form:
+        # Form data does not contain the JWT token,
+        # so something must have gone wrong. Abort login.
+        return 'CSRF token missing', 400
 
-        # ...then decode the JWT using Google's library
-        try:
-            id_info = id_token.verify_oauth2_token(
-                request.form['credential'],
-                requests.Request(),
-                environ['GOOGLE_CLIENT_ID']
-            )
-        except Exception as e:
-            # Could not decode JWT
-            return f'Invalid JWT: {str(e)}', 400
-        else:
-            # Decoded JWT successfully.
-            # Is the user verified?
-            if not id_info['email_verified']:
-                return 'Email not verified', 400
+    # First check if the CSRF token checks out...
+    csrf_cookie = request.cookies.get('g_csrf_token')
+    if not csrf_cookie:
+        return 'CSRF cookie missing', 400
+    if csrf_cookie != request.form['g_csrf_token']:
+        return 'CSRF token mismatch', 400
+
+    # ...then decode the JWT using Google's library
+    try:
+        id_info = id_token.verify_oauth2_token(
+            request.form['credential'],
+            requests.Request(),
+            environ['GOOGLE_CLIENT_ID']
+        )
+    except Exception as e:
+        # Could not decode JWT
+        return f'Invalid JWT: {str(e)}', 400
+    else:
+        # Decoded JWT successfully.
+        # Is the user verified?
+        if not id_info['email_verified']:
+            return 'Email not verified', 400
 
     # Does this user exist?
     email = id_info['email']
