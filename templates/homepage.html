@@ -6,21 +6,22 @@
 
 {% block body %}
 <div class="head">
-    <img style="padding-top: 10px; padding-left: 10px; height: 35px"
+    <img style="padding-top: 1%; padding-left: 1%; height: 35px"
         src="{{ url_for('static', filename='images/logo-2x.png')}}">
-    <p id="logo">GoVL&#234;</p>
-    <p></p>
-    <a id="login" href="{{ url_for('login.login_page') }}">Log in or register ↗</a>
+        <span id="logo">GoVL&#234;</span>
+        <span><a id="login" href=""><u>Log in or register ↗</u></a></span>
 </div>
 <div class="body">
-    <ul>
-        <li>All your classes in one place</li>
-        <li><a href="{{ url_for('login.login_page') }}" role="button" class="btn btn-lg btn-success">Get started</a>
-        </li>
-    </ul>
     <img style="padding-right: 150px; height: 400px;" id="illus"
         src="{{ url_for('static', filename='images/home-illus.png') }}">
-
+        <div class="quote" >
+            <span>All your classes in</span>
+            <br>
+            <span style="margin: 0; text-align: left;">one place</span>
+            <br>
+            <span><a href="{{ url_for('login.login_page') }}" role="button" class="btn btn-lg btn-success">Get started</a>
+            </span>
+        </div>
 </div>
 <div class="block">
     <table>
