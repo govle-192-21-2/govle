@@ -67,7 +67,7 @@
         {% endif %}
         {% if incomplete_moodle == True %}
         <p>
-            <a href="#"
+            <a href="{{ url_for('link-moodle.link_moodle_page') }}"
                class="btn btn-primary">
                 Link UVL&#234; &#8599;
             </a>
@@ -77,6 +77,7 @@
             <p>UVL&#234; linked</p>
         </div>
         {% endif %}
+        <hr class="my-5"/>
     </div>
 </div>
 {% endif %}
