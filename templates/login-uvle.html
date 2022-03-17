@@ -6,6 +6,51 @@
 
 {% block auth_content %}
 <div class="login-form">
-    <h1>Link your UVL&#234; account</h1>
+    <h1>Link UVL&#234;</h1>
+    <div class="alert alert-danger">
+        <h4>Please read before proceeding</h4>
+        <p>
+            Unlike Google, UVLê does <strong>not</strong> currently offer a way for a third-party website to access user
+            data <strong>without requiring the user to give that website their password.</strong>
+        </p>
+        <p>
+            By entering your credentials here, you acknowledge and allow that <strong>GoVLê will store them in its
+            database, and use them to retrieve information about your classes on your behalf.</strong>
+        </p>
+        <p>
+            Your credentials will be protected with 256-bit AES encryption and can be revoked from GoVLê at the Settings
+            page anytime.
+        </p>
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">I understand.</label>
+    </div>
+    <form style="display: none">
+        <div class="form-group">
+          <label for="uvle-username">Username</label>
+          <input type="text" class="form-control" id="uvle-username">
+        </div>
+        <div class="form-group">
+          <label for="uvle-password">Password</label>
+          <input type="password" class="form-control" id="uvle-password">
+        </div>
+        <button type="submit" class="btn btn-block btn-primary">Log in to UVLê</button>
+    </form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    // Unhide the form when the "I understand" checkbox is filled
+    window.onload = () => {
+        const checkbox = document.getElementById('exampleCheck1');
+        const form = document.querySelector('form');
+        checkbox.onchange = () => {
+            if (checkbox.checked) {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        }
+    }
+</script>
 {% endblock %}
