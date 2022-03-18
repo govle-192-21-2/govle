@@ -32,12 +32,12 @@
 </div>
 <div class="row justify-content-center my-3">
     <div class="col-6">
-        <a class="btn btn-primary btn-block" href="#" role="button">Link Google Classroom ↗</a>
+        <a class="btn btn-primary btn-block" href="{{ url_for('link-google.link_google_page') }}" role="button">Link Google Classroom ↗</a>
     </div>
 </div>
 <div class="row justify-content-center">
     <div class="col-6">
-        <a class="btn btn-primary btn-block" href="#" role="button">Link UVL&#234; ↗</a>
+        <a class="btn btn-primary btn-block" href="{{ url_for('link-moodle.link_moodle_page') }}" role="button">Link UVL&#234; ↗</a>
     </div>
 </div>
 {% endblock %}
