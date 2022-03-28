@@ -1,9 +1,6 @@
 /* Styles for login pages */
 
 * { box-sizing: border-box; }
-h1 {
-    font-weight: 700;
-}
 #g_id_onload {
     position: fixed;
     left: 1rem;
