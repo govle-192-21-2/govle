@@ -14,7 +14,7 @@ def dashboard_page():
     # Does the current user have complete linked accounts?
     incomplete_moodle = current_user.moodle_account.password == ''
     current_user_google = current_user.google_accounts
-    incomplete_google = len(current_user_google) == 0 or current_user_google[0].access_token == ''
+    incomplete_google = len(current_user_google) == 0 or current_user_google[0].token == ''
 
     # Check if we are returning from account linking process
     if 'link_type' in session:

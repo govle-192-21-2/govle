@@ -77,9 +77,9 @@ class Database:
         # Check if the user has an account already linked
         # User objects in DB are always created with a single GoogleCredentials instance
         # with empty fields, so it suffices to check whether len(_accounts) == 1
-        # and accounts[0].access_token == ''.
+        # and accounts[0].token == ''.
         accounts = user.google_accounts
-        if not accounts or len(accounts) == 0 or (len(accounts) == 1 and accounts[0].access_token == ''):
+        if not accounts or len(accounts) == 0 or (len(accounts) == 1 and accounts[0].token == ''):
             # Replace the empty account with the new one
             self.root.child(f'users/{user_id}/google_accounts').set([asdict(creds)])
         else:

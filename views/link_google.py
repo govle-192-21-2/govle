@@ -72,7 +72,7 @@ def link_google_callback():
     # Save credentials to database
     db = current_app.config['DB']
     google_credentials = GoogleCredentials(
-        access_token=credentials.token,
+        token=credentials.token,
         refresh_token=credentials.refresh_token,
         token_uri=credentials.token_uri,
         client_id=credentials.client_id,
