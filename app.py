@@ -48,6 +48,7 @@ def unauthorized_handler():
 
 # Routes
 init_views(app)
+init_api(app)
 
 # Run app
 if __name__ == '__main__':
