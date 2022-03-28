@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col">
         <div class="text-center">
-            <h1 class="mx-auto pb-5">Good afternoon,<br>{{ current_user['name'] }}</h1>
+            <h1 class="mx-auto pb-5">Good <span id="time-of-day">day</span>,<br>{{ current_user['name'] }}</h1>
         </div>
     </div>
 </div>
@@ -82,10 +82,7 @@
 </div>
 {% endif %}
 
-<div class="row">
-    <div class="col">
-    </div>
-
+<div class="row justify-content-center">
     <div class="col-8">
         <div class="row">
             <div class="col">
@@ -123,15 +120,9 @@
             </div>
         </div>
     </div>
-    
-    <div class="col">
-    </div>
 </div>
 
-<div class="row">
-    <div class="col">
-    </div>
-
+<div class="row justify-content-center">
     <div class="col-8">
         <h2 class="mx-auto pb-5"><br>Next 7 days</h2>
         <br>
@@ -179,8 +170,9 @@
             </div>
         </div> 
     </div>
-
-    <div class="col">
-    </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='scripts/dashboard.js') }}"></script>
 {% endblock %}

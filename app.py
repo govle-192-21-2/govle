@@ -46,12 +46,15 @@ def unauthorized_handler():
     return redirect(url_for('login.login_page') + '?next=' + request.path)
 
 # Routes
+app.register_blueprint(calendar_blueprint)
+app.register_blueprint(classes_blueprint)
+app.register_blueprint(dashboard_blueprint)
 app.register_blueprint(index_blueprint)
 app.register_blueprint(link_google_blueprint)
 app.register_blueprint(link_moodle_blueprint)
 app.register_blueprint(login_blueprint)
 app.register_blueprint(logout_blueprint)
-app.register_blueprint(dashboard_blueprint)
+app.register_blueprint(settings_blueprint)
 
 # Run app
 if __name__ == '__main__':
