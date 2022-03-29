@@ -97,6 +97,9 @@ def link_google_callback():
     )
     db.update_user_google_creds(current_user.user_id, user_info['id'], google_credentials)
 
+    # Remove new user session key
+    session.pop('IS_NEW_USER', None)
+
     # Save credentials to session and redirect to dashboard
     session['link_status'] = 'success'
     return redirect(url_for('dashboard.dashboard_page'))
