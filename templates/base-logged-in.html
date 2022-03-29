@@ -7,7 +7,7 @@
 
 {% block body %}
 <nav class="px-3 navbar navbar-expand-lg navbar-light">
-    <a class="mx-3 navbar-brand" href="#">
+    <a class="mx-3 navbar-brand" href="{{ url_for('dashboard.dashboard_page') }}">
         <img src="{{ url_for('static', filename='images/logo-2x.png') }}" alt="GoVL&#234;">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
