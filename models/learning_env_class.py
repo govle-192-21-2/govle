@@ -1,5 +1,6 @@
 from abc import ABC
 from dataclasses import dataclass
+from json import JSONEncoder
 
 
 @dataclass
@@ -32,3 +33,19 @@ class MoodleClass(LearningEnvClass):
     Abstract dataclass for a class hosted on Moodle.
     """
     completion_status: int
+
+
+class LearningEnvClassEnc(JSONEncoder):
+    """
+    JSON encoder for LearningEnvClass
+    """
+    def default(self, o):
+        if isinstance(o, LearningEnvClass):
+            return {
+                'class_id': o.class_id,
+                'name': o.name,
+                'description': o.description,
+                'url': o.url
+            }
+        else:
+            return super().default(o)

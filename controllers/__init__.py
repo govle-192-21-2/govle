@@ -1,5 +1,5 @@
 from flask import Flask
-from .google_classroom import gclass as gclass_api
+from .api_gclass import gclass as gclass_api
 
 
 def init_api(app: Flask):
