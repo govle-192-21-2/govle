@@ -9,7 +9,6 @@ from .learning_env import LearningEnv
 class GoogleClassroomClient(LearningEnv):
     def __init__(self, credentials: Dict, on_token_refresh: Callable[[GoogleCredentials], None]):
         # Create Google Credentials object from the given credentials
-        self._credentials = credentials
         creds = Credentials.from_authorized_user_info(credentials)
 
         # Check if credentials are valid
@@ -18,8 +17,8 @@ class GoogleClassroomClient(LearningEnv):
                 creds.refresh(Request())
 
                 # Update credentials
-                self._credentials = GoogleCredentials(
-                    email=self._credentials.email,
+                on_token_refresh(GoogleCredentials(
+                    email=credentials['email'],
                     token=creds.token,
                     refresh_token=creds.refresh_token,
                     token_uri=creds.token_uri,
@@ -27,18 +26,14 @@ class GoogleClassroomClient(LearningEnv):
                     client_secret=creds.client_secret,
                     scopes=creds.scopes,
                     id_token=creds.id_token,
-                    expiry=f'{creds.expiry.isoformat()}Z'
-                )
-                on_token_refresh(self._credentials)
+                    expiry=f'{creds.expiry.isoformat()}Z',
+                    user_id=credentials['user_id']
+                ))
             else:
                 raise Exception('Invalid credentials')
 
         # Create Google Classroom API service
         self.service = build('classroom', 'v1', credentials=creds)
-    
-    @property
-    def credentials(self) -> GoogleCredentials:
-        return self._credentials
     
     def get_classes(self) -> List[GoogleClass]:
         results = self.service.courses().list(pageSize=10).execute()
