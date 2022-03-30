@@ -19,7 +19,7 @@ class GoogleClassroomClient(LearningEnv):
 
                 # Update credentials
                 self._credentials = GoogleCredentials(
-                    email=self._credentials.email,
+                    email=credentials['email'],
                     token=creds.token,
                     refresh_token=creds.refresh_token,
                     token_uri=creds.token_uri,
@@ -27,7 +27,8 @@ class GoogleClassroomClient(LearningEnv):
                     client_secret=creds.client_secret,
                     scopes=creds.scopes,
                     id_token=creds.id_token,
-                    expiry=f'{creds.expiry.isoformat()}Z'
+                    expiry=f'{creds.expiry.isoformat()}Z',
+                    user_id=credentials['user_id']
                 )
                 on_token_refresh(self._credentials)
             else:
