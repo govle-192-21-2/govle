@@ -13,19 +13,6 @@ const GoogleClass = (email, url, title, description) => `
 `;
 
 $(document).ready(() => {
-    // Generate dummy data
-    // const google_classes = $('#classes-classroom');
-    // google_classes.empty();
-    // for (let i = 0; i < 10; i++) {
-    //     google_classes.append(GoogleClass(
-    //         "acdantis@up.edu.ph",
-    //         "https://google.com",
-    //         "Google Class",
-    //         "This is a dummy description"
-    //     ));
-    // }
-    return;
-
     // Get list of classes from API
     fetch('/api/v1/classes').then(response => response.json())
         .then(all_classes => {
