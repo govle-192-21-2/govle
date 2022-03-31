@@ -1,17 +1,21 @@
 from flask import Blueprint, current_app, redirect, request, session, url_for
 from flask_login import current_user, login_required
 from models.credentials import GoogleCredentials
+from requests import get
 import google_auth_oauthlib.flow
 
 link_google = Blueprint('link-google', __name__, template_folder='templates')
 
 # Google OAuth2 scopes
 scopes = [
+    'openid',
     'https://www.googleapis.com/auth/classroom.announcements.readonly',
     'https://www.googleapis.com/auth/classroom.courses.readonly',
     'https://www.googleapis.com/auth/classroom.student-submissions.me.readonly',
     'https://www.googleapis.com/auth/classroom.courseworkmaterials.readonly',
-    'https://www.googleapis.com/auth/classroom.topics.readonly'
+    'https://www.googleapis.com/auth/classroom.topics.readonly',
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile'
 ]
 
 @link_google.route('/link-google')
@@ -68,21 +72,34 @@ def link_google_callback():
         # Tell them to revoke access and try again.
         session['link_status'] = 'failure'
         return redirect(url_for('dashboard.dashboard_page'))
+    
+    # Get ID and e-mail address associated with credentials
+    try:
+        user_info = get('https://www.googleapis.com/oauth2/v1/userinfo',
+            headers={'Authorization': 'Bearer ' + credentials.token}).json()
+    except Exception as _:
+        session['link_status'] = 'failure'
+        return redirect(url_for('dashboard.dashboard_page'))
 
     # Save credentials to database
     db = current_app.config['DB']
     google_credentials = GoogleCredentials(
-        access_token=credentials.token,
+        user_id=user_info['id'],
+        email=user_info['email'],
+        token=credentials.token,
         refresh_token=credentials.refresh_token,
         token_uri=credentials.token_uri,
         client_id=credentials.client_id,
         client_secret=credentials.client_secret,
         scopes=credentials.scopes,
-        id_token=credentials.id_token
+        id_token=credentials.id_token,
+        expiry=f'{credentials.expiry.isoformat()}Z'
     )
-    db.update_user_google_creds(current_user.user_id, google_credentials)
+    db.update_user_google_creds(current_user.user_id, user_info['id'], google_credentials)
+
+    # Remove new user session key
+    session.pop('IS_NEW_USER', None)
 
     # Save credentials to session and redirect to dashboard
-    session['google_credentials'] = google_credentials
     session['link_status'] = 'success'
     return redirect(url_for('dashboard.dashboard_page'))

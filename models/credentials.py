@@ -10,8 +10,14 @@ class LearningEnvCredentials(ABC):
 
 @dataclass
 class GoogleCredentials(LearningEnvCredentials):
+    # Associated user ID
+    user_id: str = ''
+    
+    # Associated e-mail address
+    email: str = ''
+
     # OAuth2 access token
-    access_token: str = ''
+    token: str = ''
 
     # OAuth2 refresh token
     refresh_token: str = ''
@@ -30,6 +36,9 @@ class GoogleCredentials(LearningEnvCredentials):
 
     # OpenID token
     id_token: str = ''
+
+    # OAuth2 expiry
+    expiry: str = ''
 
 
 @dataclass

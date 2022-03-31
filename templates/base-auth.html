@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/base-auth.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="auth-page-root">
+    <div class="auth-page-image">
+        <img class="auth-page-logo" src="{{ url_for('static', filename='images/logo-2x.png') }}" alt="GoVL&#234;">
+    </div>
+    <div class="auth-page-form">
+        <div class="auth-page-form-content">
+            <div>{% block auth_content %}{% endblock %}</div>
+        </div>
+    </div>
+</div>
+
+<div id="g_id_onload" data-client_id="{{ google_client_id }}" data-login_uri="{{ domain }}/login"
+    data-prompt_parent_id="g_id_onload" data-auto_prompt="true" data-context="signin" data-ux_mode="popup"
+    data-auto_select="true">
+</div>
+{% endblock %}

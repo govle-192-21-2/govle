@@ -1,56 +1,24 @@
-{% extends "base.html" %}
+{% extends "base-auth.html" %}
 
 {% block title %}
 &#8212; Login
 {% endblock %}
 
-{% block head %}
-<style type="text/css">
-    h1 {
-        font-weight: 700;
-    }
-    #g_id_onload {
-        position: fixed;
-        left: 1rem;
-        bottom: 1rem;
-        z-index: 9999;
-    }
-</style>
-{% endblock %}
-
-{% block body %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col" style="padding: 0; margin: 0;">
-            <img src="{{ url_for('static', filename='images/newimage.png') }}" class="float-left"
-                style="max-width: 100%; height: 100vh">
-        </div>
-        <div class="col-lg-6">
-            <div class="float-center"
-                style="padding: 48px; position: relative; width: 446px; height: 458px; left: calc(33% - 446px/2); top: calc(50% - 458px/2); background: #FFFFFF; border-radius: 5px; font-family: Inter; font-size: 18px;">
-                <h1 style="margin-bottom: 20px;">Come here often?</h1>
-                <p>Whether you're new to GoVLê or you already have an account, just click the nifty Sign In button
-                    below.</p>
-                <div class="google-signin">
-                    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
-                        data-text="signin_with" data-shape="pill" data-logo_alignment="left">
-                    </div>
-                </div>
-
-                <p style="font-weight: 700; margin-top: 20px; margin-bottom: 20px; font-size: 14px;">
-                    Please sign in with your @up.edu.ph Google account.
-                </p>
-                <p style="font-size: 14px;">This app is in beta and is therefore limited only to a few students from the
-                    University of the Philippines Diliman.</p>
-            </div>
-        </div>
+{% block auth_content %}
+<h1 style="margin-bottom: 20px;">Come here often?</h1>
+<p>Whether you're new to GoVL&#234; or you already have an account, just click the nifty Sign In button
+    below.</p>
+<div class="google-signin">
+    <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline"
+        data-text="signin_with" data-shape="pill" data-logo_alignment="left">
     </div>
 </div>
 
-<div id="g_id_onload" data-client_id="{{ google_client_id }}" data-login_uri="{{ domain }}/login"
-    data-prompt_parent_id="g_id_onload" data-auto_prompt="true" data-context="signin" data-ux_mode="popup"
-    data-auto_select="true">
-</div>
+<p style="font-weight: 700; margin-top: 20px; margin-bottom: 20px; font-size: 14px;">
+    Please sign in with your @up.edu.ph Google account.
+</p>
+<p style="font-size: 14px;">This app is in beta and is therefore limited only to a few students from the
+    University of the Philippines Diliman.</p>
 {% endblock %}
 
 {% block scripts %}

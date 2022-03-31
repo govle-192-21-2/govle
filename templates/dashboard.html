@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col">
         <div class="text-center">
-            <h1 class="mx-auto pb-5">Good afternoon,<br>{{ current_user['name'] }}</h1>
+            <h1 class="mx-auto pb-5">Good <span id="time-of-day">day</span>,<br>{{ current_user['name'] }}</h1>
         </div>
     </div>
 </div>
@@ -17,7 +17,7 @@
 
 {# Account linking message #}
 <div class="row justify-content-center">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-8">
 {% if link_status == 'success' %}
         <div class="alert alert-success text-center">
             <strong>Success!</strong> Your
@@ -47,7 +47,7 @@
 {# Unlinked accounts message #}
 {% if incomplete_moodle == True or incomplete_google == True %}
 <div class="row justify-content-center">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-8">
         <h4>Link your class accounts</h4>
         <p>
             GoVL&#234; works best with all your accounts working together.<br>
@@ -67,7 +67,7 @@
         {% endif %}
         {% if incomplete_moodle == True %}
         <p>
-            <a href="#"
+            <a href="{{ url_for('link-moodle.link_moodle_page') }}"
                class="btn btn-primary">
                 Link UVL&#234; &#8599;
             </a>
@@ -77,7 +77,102 @@
             <p>UVL&#234; linked</p>
         </div>
         {% endif %}
+        <hr class="my-5"/>
     </div>
 </div>
 {% endif %}
+
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div class="row">
+            <div class="col">
+                <div class="card border-secondary mb-3" style="min-width: 24rem; min-height: 10rem; border: 6px solid">
+                    <div class="row no-gutters">
+                        <div class="mx-2 col-md-4 bg-secondary" style="min-height: 10rem;">
+                            <img src="{{ url_for('static', filename='images/sun.png') }}" alt="weather" width="100" class="my-4 mx-3">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h4 class="card-title">34°C</h4>
+                                <p class="card-text">Sunny in Metro Manila</p>
+                                <p class="card-text"><small class="text-muted">Feels like 36°C</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-primary mb-3" style="min-width: 24rem; min-height: 10rem; border: 6px solid">
+                    <div class="row no-gutters">
+                        <div class="mx-2 col-md-4 bg-primary" style="min-height: 1rem;">
+                            <img src="{{ url_for('static', filename='images/book.png') }}" alt="book" width="100" class="my-4 mx-3">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <h4 class="card-title">5 assignments</h4>
+                                <p class="card-text">due this week</p>
+                                <p class="card-text"><small class="text-muted">CS 150 21.1 and CS 191 AY20...</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-8">
+        <h2 class="mx-auto pb-5"><br>Next 7 days</h2>
+        <br>
+        <div class="card text-black" style="min-width: 24rem; min-height: 11rem;">
+            <div class="row no-gutters">
+                <div class="my-4 mx-4 col-md-2">
+                    <img src="{{ url_for('static', filename='images/Date.png') }}" alt="date" width="125">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h4 class="card-title">Class <a class="stretched-link p" href="#">VLE Link</a></h4>
+                        <a class="stretched-link text-dark" href="#">Homework</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="card text-black" style="min-width: 24rem; min-height: 11rem;">
+            <div class="row no-gutters">
+                <div class="my-4 mx-4 col-md-2">
+                    <img src="./img/Date.png" alt="date" width="125">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h4 class="card-title">Class <a class="stretched-link p" href="#">VLE Link</a></h4>
+                        <a class="stretched-link text-dark" href="#">Homework</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <div class="card text-black" style="min-width: 24rem; min-height: 11rem;">
+            <div class="row no-gutters">
+                <div class="my-4 mx-4 col-md-2">
+                    <img src="./img/Date.png" alt="date" width="125">
+                </div>
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h4 class="card-title">Class <a class="stretched-link p" href="#">VLE Link</a></h4>
+                        <a class="stretched-link text-dark" href="#">Homework</a>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='scripts/dashboard.js') }}"></script>
 {% endblock %}

@@ -7,14 +7,14 @@ dashboard = Blueprint('dashboard', __name__, template_folder='templates')
 @login_required
 def dashboard_page():
     # Check if the user is new via session
-    if 'new_user' in session and session['new_user'] == 'True':
+    if 'IS_NEW_USER' in session and session['IS_NEW_USER'] == 'True':
         # User is new, show new user dashboard
         return render_template('dashboard-new-user.html', active_nav='home')
 
     # Does the current user have complete linked accounts?
     incomplete_moodle = current_user.moodle_account.password == ''
     current_user_google = current_user.google_accounts
-    incomplete_google = len(current_user_google) == 0 or current_user_google[0].access_token == ''
+    incomplete_google = len(current_user_google.keys()) == 0
 
     # Check if we are returning from account linking process
     if 'link_type' in session:

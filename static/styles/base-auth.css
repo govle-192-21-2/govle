@@ -1,0 +1,112 @@
+/* Styles for login pages */
+
+* { box-sizing: border-box; }
+#g_id_onload {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 9999;
+}
+
+/* The auth page is made up of two equally-sized columns spanning at least the whole viewport. */
+.auth-page-root {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: [image] 1fr [form] 1fr;
+}
+
+/* The first column is for the logo with a full-height background. */
+.auth-page-root .auth-page-image {
+    grid-column-start: image;
+    background: url('/static/images/image.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* The logo within the first column must be centered, white, and not too large. */
+.auth-page-root .auth-page-image .auth-page-logo {
+    max-width: 10rem;
+    width: 100%;
+    filter: invert(1);
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+}
+
+/* Add a translucent dark overlay to the first column so the logo is always visible. */
+.auth-page-root .auth-page-image::after {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* The second column is for the login form container. */
+.auth-page-root .auth-page-form {
+    grid-column-start: form;
+    display: table;
+    overflow: scroll;
+    padding-top: 1rem;
+    margin-top: -1rem;
+}
+
+/* The login form container must have ample whitespace around it. */
+.auth-page-root .auth-page-form .auth-page-form-content {
+    display: table-cell;
+    vertical-align: middle;
+    padding-top: 1rem;
+}
+.auth-page-root .auth-page-form .auth-page-form-content > div {
+    max-width: 480px;
+    width: 100%;
+    padding: 1.5rem;
+    margin: 0 auto;
+}
+
+/* On smaller devices, shrink the image. */
+@media (max-width: 800px) {
+    .auth-page-root {
+        grid-template-columns: [image] 8rem [form] 1fr;
+    }
+    .auth-page-root .auth-page-image .auth-page-logo {
+        width: 5rem;
+    }
+}
+
+/* On even smaller devices, turn the columns into rows, shrink the image, and remove the centering of the form content. */
+@media screen and (max-width: 600px) {
+    .auth-page-root {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        height: 100%;
+        min-height: 100vh;
+    }
+    .auth-page-root > div {
+        grid-column-start: unset;
+    }
+    .auth-page-root .auth-page-image {
+        height: 8rem;
+    }
+    .auth-page-root .auth-page-image .auth-page-logo {
+        width: 5rem;
+    }
+    .auth-page-root .auth-page-form {
+        display: block;
+        padding: 0;
+        margin: 0;
+    }
+    .auth-page-root .auth-page-form .auth-page-form-content {
+        margin-top: 0;
+        padding-top: 0;
+    }
+}

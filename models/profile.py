@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from models.credentials import GoogleCredentials, MoodleCredentials
-from typing import Dict, List, Union
+from typing import Dict, Optional, Union
 
 @dataclass
 class Profile():
@@ -17,7 +17,7 @@ class Profile():
     moodle_account: MoodleCredentials
 
     # Linked Google accounts
-    google_accounts: List[GoogleCredentials]
+    google_accounts: Optional[Dict[str, GoogleCredentials]] = field(default_factory=dict)
 
     # User profile picture
     picture: str = field(default='')
@@ -73,5 +73,5 @@ def create_from_google_jwt(jwt_info: Dict[str, Union[str, int, bool]]) -> Profil
         email=jwt_info['email'],
         picture=jwt_info['picture'],
         moodle_account=MoodleCredentials(),
-        google_accounts=[GoogleCredentials()]
+        google_accounts={}
     )

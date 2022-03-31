@@ -7,8 +7,8 @@
 
 {% block body %}
 <nav class="px-3 navbar navbar-expand-lg navbar-light">
-    <a class="mx-3 navbar-brand" href="#">
-        <img src="{{ url_for('static', filename='images/logo-2x.png') }}" alt="GoVLê">
+    <a class="mx-3 navbar-brand" href="{{ url_for('dashboard.dashboard_page') }}">
+        <img src="{{ url_for('static', filename='images/logo-2x.png') }}" alt="GoVL&#234;">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -16,19 +16,19 @@
     <div class="collapse navbar-collapse" id="navbar-content">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item {% if active_nav == 'home' %}active{% endif %}">
-                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link" href="{{ url_for('dashboard.dashboard_page') }}">Home</a>
             </li>
             <li class="nav-item {% if active_nav == 'classes' %}active{% endif %}">
-                <a class="nav-link" href="#">Classes</a>
+                <a class="nav-link" href="{{ url_for('classes.classes_page') }}">Classes</a>
             </li>
             <li class="nav-item {% if active_nav == 'calendar' %}active{% endif %}">
-                <a class="nav-link" href="#">Calendar</a>
+                <a class="nav-link" href="{{ url_for('calendar.calendar_page') }}">Calendar</a>
             </li>
             <li class="nav-item dropdown">
                 <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false"></button>
                 <div class="mr-5 dropdown-menu dropdown-menu-right text-right">
-                    <a class="dropdown-item" href="#">Settings</a>
-                    <a class="dropdown-item" href="#">About GoVLê</a>
+                    <a class="dropdown-item" href="{{ url_for('settings.settings_page') }}">Settings</a>
+                    <a class="dropdown-item" href="https://github.com/govle-192-21-2/govle/#readme" rel="noopener" target="_blank">About GoVL&#234;</a>
                     <a class="dropdown-item" href="{{ url_for('logout.logout_page') }}">Log out</a>
                 </div>
             </li>

@@ -1,0 +1,45 @@
+{% extends "base-logged-in.html" %}
+
+{% block title %}
+&#8212; Classes
+{% endblock %}
+
+{% block content %}
+<!-- Header -->
+<div class="row">
+    <div class="col-md-12">
+        <h1>Your classes</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <p>(number of assignments this week will appear here)</p>
+    </div>
+</div>
+
+<!-- List of classes per platform -->
+<hr>
+<div class="row my-4">
+    <div class="col-md-12">
+        <h2>UVL&#234;</h2>
+    </div>
+    <div class="col-md-12">
+        <p>Unimplemented</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h2>Google Classroom</h2>
+    </div>
+    <div class="col-md-12" id="classes-classroom">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- The following JavaScript file will be at /static/scripts/classes.js -->
+<script src="{{ url_for('static', filename='scripts/classes.js') }}"></script>
+{% endblock %}
