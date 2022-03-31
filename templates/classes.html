@@ -4,10 +4,14 @@
 &#8212; Classes
 {% endblock %}
 
+{% block local_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/classes.css') }}">
+{% endblock %}
+
 {% block content %}
 <!-- Header -->
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 mb-4">
         <h1>Your classes</h1>
     </div>
 </div>
@@ -27,27 +31,14 @@
         <p>Unimplemented</p>
     </div>
 </div>
-<div class="row">
+<div class="row mb-4">
     <div class="col-md-12">
         <h2>Google Classroom</h2>
     </div>
-    <div class="col-md-12" id="classes-classroom">
-        
-        <div class="row row-cols-1 row-cols-md-3">
-            <div class="col mb-4">
-                <div class="card " style="width:15rem;">
-                    <div class="card-body">
-                        <a class="govle-class" href="${url}" rel="noopener" target="_blank">
-                            <h3 class="text-dark">${title} &#8599</h3>
-                            <p class="text-dark">${description}</p>
-                            <p class="text-dark">${email}</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="spinner-border" role="status">
+</div>
+<div class="row pb-4" id="classes-classroom">
+    <div class="col-md-12 text-center">
+        <div class="spinner-border mx-auto text-primary" role="status">
             <span class="sr-only">Loading...</span>           
         </div>
     </div>
