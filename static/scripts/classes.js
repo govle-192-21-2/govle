@@ -1,9 +1,17 @@
 const GoogleClass = (email, url, title, description) => `
-  <a class="govle-class" href="${url}" rel="noopener" target="_blank">
-    <h3>${title}</h3>
-    <p>${description}</p>
-    <p>${email}</p>
-  </a>
+<div class="row row-cols-1 row-cols-md-3">
+    <div class="col mb-4">
+        <div class="card " style="width:15rem;">
+            <div class="card-body">
+                <a class="govle-class" href="${url}" rel="noopener" target="_blank">
+                    <h3 class="text-dark">${title} &#8599</h3>
+                    <p class="text-dark">${description}</p>
+                    <p class="text-dark">${email}</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 `;
 
 $(document).ready(() => {
