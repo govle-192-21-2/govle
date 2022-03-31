@@ -6,3 +6,8 @@ nav .navbar-brand > img {
     width: auto;
     filter: saturate(0);
 }
+nav .nav-item.active a {
+    color: #20BF55 !important;
+    border-bottom: #20BF55 solid 2px;
+    font-weight: 700;
+}
