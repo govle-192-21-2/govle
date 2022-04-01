@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask_login import login_required, current_user
+from hashlib import md5
 from json import dumps
 
 govle_settings = Blueprint('govle_settings', __name__)
@@ -27,8 +28,12 @@ def govle_settings_accounts():
 
     # Get list of Google accounts
     for _, google_credentials in current_user.google_accounts.items():
+        # Hash e-mail address for Gravatar URL
+        gravatar_hash = md5(google_credentials['email'].lower().encode('utf-8')).hexdigest()
+
         accounts['google'].append({
             'email': google_credentials['email'],
+            'gravatar': f'https://www.gravatar.com/avatar/{gravatar_hash}?s=200',
             'id': google_credentials['user_id']
         })
     
