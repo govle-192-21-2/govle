@@ -2,7 +2,7 @@ const GoogleClass = (email, url, title, description) => `
     <div class="col-12 mb-4 col-lg-4 col-md-6 col-xs-12">
         <div class="card">
             <div class="card-body">
-                <a class="govle-class" href="${url}" rel="noopener" target="_blank">
+                <a class="govle-class" href="${url}?authuser=${email}" rel="noopener" target="_blank">
                     <h3 class="text-dark mb-3"><span>${title}</span><span>&#8599;</span></h3>
                     <p class="text-dark mb-0">${description}</p>
                     <p class="text-dark mb-0">${email}</p>
