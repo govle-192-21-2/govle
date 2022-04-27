@@ -8,21 +8,22 @@
 <div class="login-form">
     <h1>Link UVL&#234;</h1>
     <div class="alert alert-danger">
-        <h4>Please read before proceeding</h4>
-        <p>
-            Unlike Google, UVLê does <strong>not</strong> currently offer a way for a third-party website to access user
-            data <strong>without requiring the user to give that website their password.</strong>
-        </p>
-        <p>
-            By entering your credentials here, you acknowledge and allow that <strong>GoVLê will store them in its
-            database, and use them to retrieve information about your classes on your behalf.</strong>
-        </p>
-        <p>
-            Your credentials will be protected with 256-bit AES encryption and can be revoked from GoVLê at the Settings
-            page anytime.
-        </p>
+        <div id="alert-content">
+            <h4>Please read before proceeding</h4>
+            <p>
+                Unlike Google, UVLê does <strong>not</strong> currently offer a way for a third-party website to access user
+                data <strong>without first requiring the user to give that website their password.</strong>
+            </p>
+            <p>
+                Your credentials are <strong>NOT</strong> stored by GoVLê; they are only used to obtain a token,
+                and you will be required to enter them again when the token expires.
+            </p>
+        </div>
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">I understand.</label>
+        <label class="form-check-label" for="exampleCheck1">
+            I understand, acknowledge, and allow that <strong>GoVLê will use my UVLê credentials to obtain a
+            token</strong> that it can use to access data about my classes.
+        </label>
     </div>
     <form style="display: none">
         <div class="form-group">
@@ -39,18 +40,8 @@
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript">
-    // Unhide the form when the "I understand" checkbox is filled
-    window.onload = () => {
-        const checkbox = document.getElementById('exampleCheck1');
-        const form = document.querySelector('form');
-        checkbox.onchange = () => {
-            if (checkbox.checked) {
-                form.style.display = 'block';
-            } else {
-                form.style.display = 'none';
-            }
-        }
-    }
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsencrypt/3.2.1/jsencrypt.min.js" integrity="sha512-hI8jEOQLtyzkIiWVygLAcKPradIhgXQUl8I3lk2FUmZ8sZNbSSdHHrWo5mrmsW1Aex+oFZ+UUK7EJTVwyjiFLA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!-- The following JavaScript file will be at /static/scripts/settings.js -->
+<script src="{{ url_for('static', filename='scripts/login-uvle.js') }}"></script>
 {% endblock %}

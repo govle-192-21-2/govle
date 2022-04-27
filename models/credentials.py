@@ -46,7 +46,7 @@ class MoodleCredentials(LearningEnvCredentials):
     # Username
     username: str = ''
 
-    # Password
+    # Token
     password: str = ''
 
     # Moodle server URL
