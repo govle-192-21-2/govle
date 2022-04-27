@@ -21,6 +21,7 @@ class LearningEnvClass(ABC):
     url: str
 
 
+@dataclass
 class GoogleClass(LearningEnvClass):
     """
     Abstract dataclass for a class hosted on Google Classroom.
@@ -28,6 +29,7 @@ class GoogleClass(LearningEnvClass):
     pass
 
 
+@dataclass
 class MoodleClass(LearningEnvClass):
     """
     Abstract dataclass for a class hosted on Moodle.
@@ -41,11 +43,14 @@ class LearningEnvClassEnc(JSONEncoder):
     """
     def default(self, o):
         if isinstance(o, LearningEnvClass):
-            return {
+            data = {
                 'class_id': o.class_id,
                 'name': o.name,
                 'description': o.description,
                 'url': o.url
             }
+            if 'completion_status' in dir(o):
+                data['completion_status'] = o.completion_status
+            return data
         else:
             return super().default(o)
