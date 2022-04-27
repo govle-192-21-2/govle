@@ -36,6 +36,12 @@ window.onload = () => {
         // Get username and password
         const username = document.getElementById('uvle-username').value;
         const password = document.getElementById('uvle-password').value;
+
+        // Check if either field is empty
+        if (username.length === 0 || password.length === 0) {
+            alert('Please fill in both fields');
+            return;
+        }
         
         // Encrypt credentials
         const credentials = `${username}:${password}`;
