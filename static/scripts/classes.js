@@ -14,7 +14,7 @@ const GoogleClass = (email, url, title, description) => `
 
 $(document).ready(() => {
     // Get list of classes from API
-    fetch('/api/v1/classes').then(response => response.json())
+    fetch('/api/v1/google/classes').then(response => response.json())
         .then(all_classes => {
             const google_classes = $('#classes-classroom');
 
