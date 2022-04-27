@@ -77,3 +77,18 @@ class Database:
 
         # Save credentials under corresponding user ID
         self.root.child(f'users/{user_id}/google_accounts/{cred_id}').set(asdict(creds))
+    
+    def update_user_moodle_creds(self, user_id: str, creds: MoodleCredentials):
+        """
+        Updates a user's Moodle credentials.
+
+        :param user_id: User ID (string)
+        :param creds: MoodleCredentials instance
+        """
+        # Don't do anything if user does not exist
+        user = self.lookup_user_by_id(user_id)
+        if not user:
+            raise ValueError(f'User {user_id} does not exist')
+
+        # Save credentials under corresponding user ID
+        self.root.child(f'users/{user_id}/moodle_account').set(asdict(creds))
