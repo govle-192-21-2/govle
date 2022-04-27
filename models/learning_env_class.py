@@ -32,7 +32,7 @@ class MoodleClass(LearningEnvClass):
     """
     Abstract dataclass for a class hosted on Moodle.
     """
-    completion_status: int
+    completion_status: float
 
 
 class LearningEnvClassEnc(JSONEncoder):
