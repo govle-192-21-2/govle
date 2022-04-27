@@ -1,6 +1,8 @@
 # Main application file for GoVLê
 from controllers import init_api
 from controllers.database import Database
+from cryptography.hazmat.backends import default_backend
+from cryptography.hazmat.primitives import serialization
 from dotenv import load_dotenv
 from firebase_admin import credentials, db
 from flask import Flask, redirect, request, url_for
@@ -35,6 +37,13 @@ firebase_admin.initialize_app(cred, {
     'databaseURL': environ['FIREBASE_DATABASE_URL']
 })
 app.config['DB'] = Database(db.reference())
+
+# RSA cipher for decrypting credentials
+with open('priv.pem', 'rb') as priv_key_file:
+    app.config['RSA_CIPHER'] = serialization.load_pem_private_key(
+        priv_key_file.read(),
+        password=None,
+        backend=default_backend())
 
 # User loader
 @login_manager.user_loader
