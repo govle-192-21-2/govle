@@ -14,17 +14,68 @@ table {
   width: 70%;
 }
 
-th, td {
-  padding: 0px 0px 26px;
-  text-align: left;
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rectangle_red {
+    width: 24px;
+    height: 24px;
+    top: 0px;
+    position: relative;
+
+    background: #C81A2F;
+    border-radius: 6px;
+}
+
+.rectangle_green {
+    width: 24px;
+    height: 24px;
+    top: 0px;
+    position: relative;
+
+    background: #199A44;
+    border-radius: 6px;
+}
+
+
+body{
+    font-family: 'Inter';
+}
+th {
+  padding: 0px 0px 20px;
+  text-align: center;
   border-bottom: 1px solid #ddd;
+  color: #6D6D6D;
+}
+
+td {
+  padding: 0px 0px 60px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+}
+
+h2, p {
+  text-align: center;
+
 }
 </style>
 <body>
-    <h2 align="center">
-    March 2022
-    </h2>
-    <br />
+    <div class = 'flex-container'  style = "gap: 270px;">
+        <span style = "font-size: 35px">&#10094</span>
+        <h2>
+        </h2>
+        <span style = "font-size: 35px">&#10095</span>
+    </div>
+    <div class = 'flex-container', style = "gap: 10px; padding: 18px;">
+        <div class = 'rectangle_red', style = "order: 1;"></div>
+        <div style = "order: 1;">UVLe</div>
+        <div class = 'rectangle_green', style = "order: 1;"></div>
+        <div style = "order: 1;">Google Classroom</div>
+    </div>
       
     <table align="center" 
         cellspacing="20" cellpadding="20">
@@ -41,61 +92,7 @@ th, td {
         </thead>
           
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>1</td>
-                <td>2</td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>11</td>
-                <td>12</td>
-                <td>13</td>
-                <td>14</td>
-                <td>15</td>
-                <td>16</td>
-            </tr>
-            <tr>
-                <td>17</td>
-                <td>18</td>
-                <td>19</td>
-                <td>20</td>
-                <td>21</td>
-                <td>22</td>
-                <td>23</td>
-            </tr>
-            <tr>
-                <td>24</td>
-                <td>25</td>
-                <td>26</td>
-                <td>27</td>
-                <td>28</td>
-                <td>29</td>
-                <td>30</td>
-            </tr>
-            <tr>
-                <td>31</td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-            </tr>
+           
         </tbody>
     </table>
 </body>
