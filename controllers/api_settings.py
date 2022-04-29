@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, current_app, request
 from flask_login import login_required, current_user
 from hashlib import md5
 from json import dumps
@@ -39,3 +39,29 @@ def govle_settings_accounts():
     
     # Return as JSON
     return dumps(accounts)
+
+
+@govle_settings.route('/settings/unlink', methods=['POST'])
+@login_required
+def unlink_page():
+    # Get account type from query string
+    account_type = request.json['type']
+    if account_type == 'google':
+        # Get Google account ID to unlink
+        account_id = request.json['id']
+        if account_id not in current_user.google_accounts:
+            return '{"success": false, "error": "No such linked Google account"}', 404
+
+        # Delete from database
+        db = current_app.config['DB']
+        db.delete_user_google_creds(current_user.user_id, account_id)
+
+        return f'"success": true, "type": "google", "id": {account_id}', 200
+    elif account_type == 'moodle':
+        # Delete from database
+        db = current_app.config['DB']
+        db.delete_user_moodle_creds(current_user.user_id)
+
+        return '{"success": true, "type": "moodle"}', 200
+    
+    return '{"success": false, "error": "Unknown account type"}', 400
