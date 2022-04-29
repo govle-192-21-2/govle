@@ -36,3 +36,17 @@ def gclass_classes():
     # The classes are returned as a list of GoogleClass dataclass instances,
     # so we need to serialize them to JSON.
     return dumps(all_classes, cls=LearningEnvClassEnc)
+
+
+@gclass.route('/coursework')
+def gclass_coursework():
+    # Perform request for all linked accounts
+    all_coursework = {}
+    for _, google_credentials in current_user.google_accounts.items():
+        # Get list of coursework from Google Classroom API
+        client = GoogleClassroomClient(google_credentials, on_token_refresh)
+        all_coursework[google_credentials['email']] = client.get_deadlines()
+    
+    # The coursework is returned as a list of GoogleCoursework dataclass instances,
+    # so we need to serialize them to JSON.
+    return dumps(all_coursework)
