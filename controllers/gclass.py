@@ -47,6 +47,7 @@ class GoogleClassroomClient(LearningEnv):
                 description=course['descriptionHeading'],
                 url=course['alternateLink']
             ))
+
         return classes
     
     def get_deadlines(self) -> List[str]:
@@ -54,12 +55,12 @@ class GoogleClassroomClient(LearningEnv):
         deadlines_list = []
 
         for my_class in my_classes:
-            class_id = my_class['class_id']
+            class_id = str(my_class.class_id)
 
-            coursework_result = self.service.courses().courseWork().list(courseId=class_id, pageSize=10).execute()
+            coursework_result = self.service.courses().courseWork().list(courseId=class_id).execute()
             coursework = coursework_result.get('courseWork', [])
-
-            deadlines = [coursework['title'], list(coursework['dueDate']), list(coursework['dueTime'])]
-            deadlines_list.append(deadlines)
+            
+            if coursework != []:
+                deadlines_list.append(coursework)
         
         return deadlines_list
