@@ -23,7 +23,7 @@ $(document).ready(() => {
                 const linked_moodle = $.parseHTML(LinkedAccount(
                     all_accounts['moodle']['username'],
                     'https://uvle.upd.edu.ph/pluginfile.php/1/core_admin/logocompact/300x300/1645818713/logo-uvle-min-1024x1024.png',
-                    'Moodle'
+                    all_accounts['moodle']['server']
                 ));
                 $(linked_moodle).find('a').click(() => unlink_account('moodle', ''));
                 account_list.append(linked_moodle);
