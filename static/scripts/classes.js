@@ -37,12 +37,15 @@ $(document).ready(() => {
 
             // Create a new div for each class
             moodle_classes.forEach(moodle_class => {
+                // Round completion status to 1 decimal place
+                const progress = Math.round(moodle_class.completion_status * 10) / 10;
+
                 // Create a new class element
                 const class_element = MoodleClass(
                     moodle_class.url,
                     moodle_class.name,
                     moodle_class.description,
-                    moodle_class.completion_status
+                    progress
                 )
 
                 // Add the class element to the page

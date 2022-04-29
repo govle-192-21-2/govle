@@ -1,5 +1,4 @@
 from dataclasses import asdict
-from xml.etree.ElementTree import QName
 from firebase_admin.db import Reference
 from models.credentials import GoogleCredentials, MoodleCredentials
 from models.profile import Profile
@@ -32,6 +31,34 @@ class Database:
         Adds a new user to the database.
         """
         self.root.child(f'users/{user.user_id}').set(asdict(user))
+    
+    def delete_user_google_creds(self, user_id: str, google_account_id: str):
+        """
+        Deletes a user's Google credentials.
+
+        :param user_id: User ID (string)
+        """
+        # Don't do anything if user does not exist
+        user = self.lookup_user_by_id(user_id)
+        if not user:
+            raise ValueError(f'User {user_id} does not exist')
+
+        # Delete credentials under corresponding user ID and Google Account ID
+        self.root.child(f'users/{user_id}/google_accounts/{google_account_id}').delete()
+    
+    def delete_user_moodle_creds(self, user_id: str):
+        """
+        Deletes a user's Moodle credentials.
+
+        :param user_id: User ID (string)
+        """
+        # Don't do anything if user does not exist
+        user = self.lookup_user_by_id(user_id)
+        if not user:
+            raise ValueError(f'User {user_id} does not exist')
+
+        # Delete credentials under corresponding user ID
+        self.root.child(f'users/{user_id}/moodle_account').set({'password': ''})
     
     def lookup_user_by_email(self, email: str) -> Optional[Profile]:
         """

@@ -14,7 +14,7 @@ def gclass_before_request():
     # Check if user has Google credentials
     if len(current_user.google_accounts.keys()) == 0:
         # Redirect to Google account linking page
-        return redirect(url_for('link_google.link_google_page'))
+        return redirect(url_for('link-google.link_google_page'))
 
 
 # Will run if tokens are updated
