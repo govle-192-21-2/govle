@@ -44,7 +44,7 @@ class Database:
             raise ValueError(f'User {user_id} does not exist')
 
         # Delete credentials under corresponding user ID and Google Account ID
-        self.root.child(f'users/{user_id}/google_accounts/{google_account_id}').set()
+        self.root.child(f'users/{user_id}/google_accounts/{google_account_id}').delete()
     
     def delete_user_moodle_creds(self, user_id: str):
         """
