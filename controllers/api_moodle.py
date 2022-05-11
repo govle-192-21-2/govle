@@ -3,6 +3,7 @@ from flask import Blueprint, current_app, redirect, url_for
 from flask_login import login_required, current_user
 from json import dumps
 from models.credentials import MoodleCredentials
+from models.deadline import DeadlineEnc
 from models.learning_env_class import LearningEnvClassEnc
 
 moodle = Blueprint('moodle', __name__)
@@ -26,3 +27,8 @@ def create_moodle_client(creds: MoodleCredentials) -> MoodleClient:
 def moodle_get_classes():
     client = create_moodle_client(current_user.moodle_account)
     return dumps(client.get_classes(), cls=LearningEnvClassEnc)
+
+@moodle.route('/deadlines')
+def moodle_get_deadlines():
+    client = create_moodle_client(current_user.moodle_account)
+    return dumps(client.get_deadlines(), cls=DeadlineEnc)

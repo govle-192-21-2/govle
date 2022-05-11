@@ -1,4 +1,5 @@
 from models.credentials import MoodleCredentials
+from models.deadline import Deadline
 from models.learning_env_class import MoodleClass
 from typing import Dict, List, Optional
 from .learning_env import LearningEnv
@@ -72,5 +73,25 @@ class MoodleClient(LearningEnv):
 
         return classes
 
-    def get_deadlines(self) -> List[str]:
-        return ['Deadline 1', 'Deadline 2']
+    def get_deadlines(self) -> List[Deadline]:
+        deadlines = []
+
+        # Get upcoming view from Moodle API
+        response = self._perform_request('core_calendar_get_calendar_upcoming_view')
+        events = response.json()['events']
+        for event in events:
+            # All assignments are actionable events, denoted by ['isactionevent'] == True.
+            # Filter for those.
+            if not event['isactionevent']:
+                continue
+            
+            # Create Deadline instance from event
+            deadlines.append(Deadline(
+                name=event['name'],
+                timestamp=event['timestart'],
+                course=event['course']['id'],
+                platform=self.credentials.server,
+                url=event['url']
+            ))
+
+        return deadlines
