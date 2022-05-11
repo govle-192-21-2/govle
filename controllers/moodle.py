@@ -89,7 +89,7 @@ class MoodleClient(LearningEnv):
             deadlines.append(Deadline(
                 name=event['name'],
                 timestamp=event['timestart'],
-                course=event['course']['id'],
+                course=event['course']['fullname'],
                 platform=self.credentials.server,
                 url=event['url']
             ))
