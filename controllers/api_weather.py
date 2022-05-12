@@ -100,7 +100,7 @@ def weather_route():
         'condition': mapped_condition[0],
         'icon': mapped_condition[icon_index],
         'place': region_name,
-        'temperature': weather_data['current_weather']['temperature'],
-        'feels_like': apparent_temp
+        'temperature': int(weather_data['current_weather']['temperature']),
+        'feels_like': int(apparent_temp)
     })
 
