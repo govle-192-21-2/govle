@@ -24,13 +24,24 @@ $(document).ready(() => {
     // Update greeting with proper time of day
     const timeOfDayGreeting = $('#time-of-day');
     const currentHour = new Date().getHours();
+    let timeOfDay = 'day';
     if (currentHour < 12) {
         timeOfDayGreeting.text('morning');
     } else if (currentHour < 18) {
         timeOfDayGreeting.text('afternoon');
     } else {
         timeOfDayGreeting.text('evening');
+        timeOfDay = 'night';
     }
+
+    // Get weather from API
+    fetch(`/api/v1/weather?timeOfDay=${timeOfDay}`).then(response => response.json())
+        .then(weather => {
+            $('#weather-icon').addClass(`wi-${weather.icon}`);
+            $('#weather-temp').html(`${weather.temperature}&deg;C`);
+            $('#weather-desc').text(`${weather.condition} in ${weather.place}`);
+            $('#weather-fl').html(`Feels like ${weather.feels_like}&deg;C`);
+        });
 
     // Get list of deadlines from API
     fetch('/api/v1/moodle/deadlines').then(response => response.json())

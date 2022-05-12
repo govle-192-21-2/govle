@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block local_style %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css"
+    integrity="sha512-r/Gan7PMSRovDus++vDS2Ayutc/cSdl268u047n4z+k7GYuR7Hiw71FsT3QQxdKJBVHYttOJ6IGLnlM9IoMToQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/dashboard.css') }}">
 {% endblock %}
 
@@ -93,13 +96,13 @@
                 <div class="card border-secondary mb-3" style="min-width: 24rem; min-height: 10rem; border: 6px solid">
                     <div class="row no-gutters">
                         <div class="col-md-4 bg-secondary" style="min-height: 10rem;">
-                            <img src="{{ url_for('static', filename='images/sun.png') }}" alt="weather" width="100" class="my-4 mx-3">
+                            <i id="weather-icon" style="color: white; font-size: 6rem" class="wi"></i>
                         </div>
                         <div class="col-md-6">
                             <div class="card-body">
-                                <h4 class="card-title">34°C</h4>
-                                <p class="card-text">Sunny in Metro Manila</p>
-                                <p class="card-text"><small class="text-muted">Feels like 36°C</small></p>
+                                <h4 id="weather-temp" class="card-title">...</h4>
+                                <p id="weather-desc" class="card-text">...</p>
+                                <p id="weather-fl" class="card-text"><small class="text-muted">...</small></p>
                             </div>
                         </div>
                     </div>
