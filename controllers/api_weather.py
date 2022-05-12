@@ -48,7 +48,7 @@ def weather_before_request():
 @weather.route('/weather')
 def weather_route():
     # Return dummy data if running in development mode
-    if current_app.config['DEBUG'] or 'HTTP_X-Real-IP' not in request.environ:
+    if current_app.config['DEBUG'] or 'X-Forwarded-For' not in request.headers:
         return dumps({
             'condition': 'Clear',
             'icon': 'day-sunny',
@@ -58,7 +58,8 @@ def weather_route():
         })
 
     # Get user IP address and time of day
-    ip_address = request.environ['HTTP_X-Real-IP']
+    ip_address_list = request.headers.getlist('X-Forwarded-For')
+    ip_address = ip_address_list[0].split(',')[0]
     time_of_day = request.args.get('timeOfDay')
     icon_index = 1 if time_of_day == 'day' else 2
 
