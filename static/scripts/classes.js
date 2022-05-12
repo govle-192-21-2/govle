@@ -5,7 +5,7 @@ const GoogleClass = (email, url, title, description) => `
                 <a class="govle-class" href="${url}?authuser=${email}" rel="noopener" target="_blank">
                     <h3 class="text-dark mb-3"><span>${title}</span><span>&#8599;</span></h3>
                     <p class="text-dark mb-0">${description}</p>
-                    <p class="text-dark mb-0">${email}</p>
+                    <p class="text-secondary mb-0">${email}</p>
                 </a>
             </div>
         </div>
@@ -19,7 +19,13 @@ const MoodleClass = (url, title, description, progress) => `
                 <a class="govle-class" href="${url}" rel="noopener" target="_blank">
                     <h3 class="text-dark mb-3"><span>${title}</span><span>&#8599;</span></h3>
                     <p class="text-dark mb-0">${description}</p>
-                    <p class="text-dark mb-0">${progress}% complete</p>
+                    <div class="progress mt-2">
+                        <div class="progress-bar bg-success" role="progressbar"
+                            aria-valuemin="0" aria-valuemax="100"
+                            style="width: ${progress}%" aria-valuenow="${parseInt(progress)}">
+                            ${parseInt(progress)}%
+                        </div>
+                    </div>
                 </a>
             </div>
         </div>
