@@ -2,9 +2,9 @@
     text-decoration: none;
 }
 
-.govle-class h3 {
+.govle-class h4 {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    font-weight: 400;
+    font-weight: 500;
 }
