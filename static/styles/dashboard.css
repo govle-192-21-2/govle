@@ -1,0 +1,57 @@
+.deadline {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "deadline-date deadline-detail";
+    grid-gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.deadline:not(:last-child) {
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 1rem;
+}
+
+.deadline > .deadline-date {
+    grid-area: deadline-date;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 15px;
+    background: #0B4F6C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.deadline-date > h1, .deadline-date > h6 {
+    color: white;
+    text-transform: uppercase;
+}
+
+.deadline-date > h1 {
+    font-weight: 100;
+    font-size: 3rem;
+    margin-bottom: 0;
+}
+
+.deadline-date > h6 {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.deadline > .deadline-detail {
+    grid-area: deadline-detail;
+}
+
+.deadline-set > h2 {
+    font-weight: 500;
+    font-size: 1.75rem;
+}
+
+.deadline-set .course-link {
+    display: inline-block;
+    margin-left: .5rem;
+    font-weight: 400;
+    font-size: 1rem;
+}
