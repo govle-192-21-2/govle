@@ -79,14 +79,28 @@ def weather_route():
     })
     weather_data = weather_response.json()
 
+    # Was there an error?
+    if 'error' in weather_data.keys() and weather_data['error']:
+        return dumps({
+            'condition': 'Unknown',
+            'icon': 'cloud',
+            'place': 'Unknown',
+            'temperature': 'Unknown',
+            'feels_like': 'Unknown'
+        })
+
+    # Get apparent temperature for current hour
+    current_hour = weather_data['current_weather']['time']
+    apparent_temp_index = weather_data['hourly']['time'].index(current_hour)
+    apparent_temp = weather_data['hourly']['apparent_temperature'][apparent_temp_index]
+
     # Return data with appropriate condition and icon name
     mapped_condition = weather_codes[str(weather_data['current_weather']['weathercode'])]
-    apparent_temps = weather_data['hourly']['apparent_temperature']
     return dumps({
         'condition': mapped_condition[0],
         'icon': mapped_condition[icon_index],
         'place': region_name,
         'temperature': weather_data['current_weather']['temperature'],
-        'feels_like': apparent_temps[len(apparent_temps) - 1]
+        'feels_like': apparent_temp
     })
 
