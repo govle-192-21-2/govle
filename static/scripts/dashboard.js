@@ -18,6 +18,7 @@ const Deadline = (deadlineName, deadlineLink) => `
         <a href=${deadlineLink} target="_blank" rel="noopener">${deadlineName}</a>
     </li>
 `;
+const MonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 $(document).ready(() => {
     // Update greeting with proper time of day
@@ -42,11 +43,8 @@ $(document).ready(() => {
             for (let date in moodle_deadlines) {
                 // Parse YYYY-MM-DD date into MM and DD
                 const date_split = date.split('-');
-                const month = date_split[1];
+                const month = MonthNames[parseInt(date_split[1]) - 1];
                 const day = date_split[2];
-
-                // Get month name
-                const month_name = new Date(date).toLocaleString('en-US', { month: 'long' });
 
                 // Iterate through each course
                 const deadlineSetList = [];
@@ -76,7 +74,7 @@ $(document).ready(() => {
                 // Concat all deadline set elements into one string
                 const deadlineRow = DeadlineRow(
                     day,
-                    month_name,
+                    month,
                     deadlineSetList.join('')
                 );
 
