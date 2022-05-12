@@ -1,3 +1,7 @@
+#deadlines-container {
+    margin-top: 3rem;
+}
+
 .deadline {
     display: grid;
     grid-template-columns: 7rem 1fr;
@@ -27,12 +31,13 @@
 .deadline-date > h1, .deadline-date > h6 {
     color: white;
     text-transform: uppercase;
+    margin-bottom: 0;
 }
 
 .deadline-date > h1 {
     font-weight: 100;
     font-size: 3rem;
-    margin-bottom: 0;
+    margin-bottom: .125rem;
 }
 
 .deadline-date > h6 {
@@ -54,4 +59,84 @@
     margin-left: .5rem;
     font-weight: 400;
     font-size: 1rem;
+}
+
+.weather {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "weather-icon weather-detail";
+    grid-gap: 1.5rem;
+    border-left: 1px solid #ddd;
+    padding-left: 2.5rem;
+    height: 100%;
+}
+
+.weather > .weather-icon {
+    grid-area: weather-icon;
+    width: 4rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.weather-icon i {
+    display: block;
+    font-size: 2.5rem;
+}
+
+.weather > .weather-detail {
+    grid-area: weather-detail;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.weather-detail h2, .weather-detail p {
+    margin-bottom: .125rem;
+}
+
+.weather-detail h2 {
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.weather-detail p {
+    font-size: 0.875rem;
+    line-height: 1rem;
+}
+
+#weather-fl {
+    color: #999;
+}
+
+@media screen and (max-width: 1199px) {
+    #greeting {
+        text-align: center;
+    }
+    #deadlines-container {
+        margin-top: 5rem;
+    }
+    .deadline {
+        grid-template-columns: 4rem 1fr;
+    }
+    .deadline > .deadline-date {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 5px;
+    }
+    .deadline-date h1 {
+        font-size: 1.5rem;
+    }
+    .deadline-date h6 {
+        font-size: 0.75rem;
+    }
+    .weather {
+        margin-top: 1rem;
+        border: none;
+        padding-left: 0;
+    }
 }

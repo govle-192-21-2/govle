@@ -47,7 +47,7 @@ $(document).ready(() => {
     fetch('/api/v1/moodle/deadlines').then(response => response.json())
         .then(moodle_deadlines => {
             // Empty container
-            $('#deadlines-container').empty();
+            $('#deadlines-container').empty().removeClass('text-center');
 
             // Iterate through each date
             let num_deadlines = 0;

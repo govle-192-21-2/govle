@@ -14,9 +14,19 @@
 {% block content %}
 {% if link_status != 'failure' %}
 <div class="row">
-    <div class="col">
-        <div class="text-center">
-            <h1 class="mx-auto pb-5">Good <span id="time-of-day">day</span>,<br>{{ current_user['name'] }}</h1>
+    <div class="offset-xl-2 col-xl-4 col-12">
+        <h1 id="greeting">Good <span id="time-of-day">day</span>,<br>{{ current_user['name'] }}</h1>
+    </div>
+    <div class="col-xl-4 col-12">
+        <div class="weather">
+            <div class="weather-icon">
+                <i id="weather-icon" class="wi"></i>
+            </div>
+            <div class="weather-detail">
+                <h2 id="weather-temp">Loading weather...</h2>
+                <p id="weather-desc"></p>
+                <p id="weather-fl"></p>
+            </div>
         </div>
     </div>
 </div>
@@ -90,51 +100,9 @@
 {% endif %}
 
 <div class="row justify-content-center">
-    <div class="col-12">
-        <div class="row">
-            <div class="col">
-                <div class="card border-secondary mb-3" style="min-width: 24rem; min-height: 10rem; border: 6px solid">
-                    <div class="row no-gutters">
-                        <div class="col-md-4 bg-secondary" style="min-height: 10rem;">
-                            <i id="weather-icon" style="color: white; font-size: 6rem" class="wi"></i>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card-body">
-                                <h4 id="weather-temp" class="card-title">...</h4>
-                                <p id="weather-desc" class="card-text">...</p>
-                                <p id="weather-fl" class="card-text"><small class="text-muted">...</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card border-primary mb-3" style="min-width: 24rem; min-height: 10rem; border: 6px solid">
-                    <div class="row no-gutters">
-                        <div class="col-md-4 bg-primary" style="min-height: 1rem;">
-                            <img src="{{ url_for('static', filename='images/book.png') }}" alt="book" width="100" class="my-4 mx-3">
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card-body">
-                                <h4 class="card-title" id="deadlines-overview">...</h4>
-                                <p class="card-text">coming up</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row justify-content-center mt-4">
-    <div class="col-8">
-        <h2 class="pb-4">Upcoming deadlines</h2>
-        <div id="deadlines-container">
-            <div class="spinner-border mx-auto text-primary" role="status">
-                <span class="sr-only">Loading...</span>           
-            </div>
+    <div class="col-xl-8 col-12 text-center" id="deadlines-container">
+        <div class="spinner-border mx-auto text-primary" role="status">
+            <span class="sr-only">Loading...</span>           
         </div>
     </div>
 </div>
