@@ -19,6 +19,68 @@ const Deadline = (deadlineName, deadlineLink) => `
     </li>
 `;
 const MonthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const buildDeadlineList = (rawDeadlineList) => {
+    let mergedDeadlineList;
+    if (rawDeadlineList.length === 1) {
+        mergedDeadlineList = rawDeadlineList[0];
+
+        // Uncenter container contents
+        $('#deadlines-container').removeClass('text-center');
+    } else {
+        // Merge both deadline lists
+        mergedDeadlineList = Object.assign({}, rawDeadlineList[0], rawDeadlineList[1]);
+    
+        // Empty deadlines container
+        $('#deadlines-container').empty();
+    }
+
+    // Iterate through each date
+    let num_deadlines = 0;
+    for (let date in mergedDeadlineList) {
+        // Parse YYYY-MM-DD date into MM and DD
+        const date_split = date.split('-');
+        const month = MonthNames[parseInt(date_split[1]) - 1];
+        const day = date_split[2];
+
+        // Iterate through each course
+        const deadlineSetList = [];
+        for (let course in mergedDeadlineList[date]) {
+            // Iterate through each deadline
+            const deadlineList = [];
+            for (let deadline in mergedDeadlineList[date][course]['deadlines']) {
+                // Add deadline to list
+                deadlineList.push(Deadline(
+                    mergedDeadlineList[date][course]['deadlines'][deadline]['name'],
+                    mergedDeadlineList[date][course]['deadlines'][deadline]['url']
+                ));
+
+                // Increment number of deadlines
+                num_deadlines++;
+            }
+
+            // Concat all deadline elements into one string
+            const deadlineSet = DeadlineSet(
+                course,
+                mergedDeadlineList[date][course]['url'],
+                deadlineList.join('')
+            );
+            deadlineSetList.push(deadlineSet);
+        }
+
+        // Concat all deadline set elements into one string
+        const deadlineRow = DeadlineRow(
+            day,
+            month,
+            deadlineSetList.join('')
+        );
+
+        $('#deadlines-container').append(deadlineRow);
+    }
+
+    // Update number of deadlines
+    const with_s = num_deadlines === 1 ? '' : 's';
+    $('#deadlines-overview').text(`${num_deadlines} assignment${with_s}`);
+};
 
 $(document).ready(() => {
     // Update greeting with proper time of day
@@ -44,62 +106,11 @@ $(document).ready(() => {
         });
 
     // Get list of deadlines from API
+    let deadlines = [];
     fetch('/api/v1/moodle/deadlines').then(response => response.json())
-        .then(moodle_deadlines => {
-            // Empty container
-            $('#deadlines-container').empty().removeClass('text-center');
-
-            // Iterate through each date
-            let num_deadlines = 0;
-            for (let date in moodle_deadlines) {
-                // Parse YYYY-MM-DD date into MM and DD
-                const date_split = date.split('-');
-                const month = MonthNames[parseInt(date_split[1]) - 1];
-                const day = date_split[2];
-
-                // Iterate through each course
-                const deadlineSetList = [];
-                for (let course in moodle_deadlines[date]) {
-                    // Iterate through each deadline
-                    const deadlineList = [];
-                    for (let deadline in moodle_deadlines[date][course]['deadlines']) {
-                        // Add deadline to list
-                        deadlineList.push(Deadline(
-                            moodle_deadlines[date][course]['deadlines'][deadline]['name'],
-                            moodle_deadlines[date][course]['deadlines'][deadline]['url']
-                        ));
-
-                        // Increment number of deadlines
-                        num_deadlines++;
-                    }
-
-                    // Concat all deadline elements into one string
-                    const deadlineSet = DeadlineSet(
-                        course,
-                        moodle_deadlines[date][course]['url'],
-                        deadlineList.join('')
-                    );
-                    deadlineSetList.push(deadlineSet);
-                }
-
-                // Concat all deadline set elements into one string
-                const deadlineRow = DeadlineRow(
-                    day,
-                    month,
-                    deadlineSetList.join('')
-                );
-
-                $('#deadlines-container').append(deadlineRow);
-            }
-
-            // Update number of deadlines
-            const with_s = num_deadlines === 1 ? '' : 's';
-            $('#deadlines-overview').text(`${num_deadlines} assignment${with_s}`);
-        });
-    // fetch('/api/v1/google/coursework').then(response => response.json())
-    //     .then(google_coursework => {
-    //         const google_coursework_el = $('#classroom-deadlines');
-    //         google_coursework_el.empty();
-    //         google_coursework_el.text(google_coursework);
-    //     });
+        .then(moodle_deadlines => deadlines.push(moodle_deadlines))
+        .then(() => buildDeadlineList(deadlines));
+    fetch('/api/v1/google/coursework').then(response => response.json())
+        .then(google_deadlines => deadlines.push(google_deadlines))
+        .then(() => buildDeadlineList(deadlines));
 });

@@ -97,7 +97,7 @@ class GoogleClassroomClient(LearningEnv):
                     name=coursework['title'],
                     timestamp=due_timestamp,
                     course=my_class.name,
-                    course_id=my_class.class_id,
+                    course_url=my_class.url,
                     platform='Google Classroom',
                     url=coursework['alternateLink']
                 ))

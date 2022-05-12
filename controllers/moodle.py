@@ -90,7 +90,7 @@ class MoodleClient(LearningEnv):
                 name=event['name'],
                 timestamp=event['timestart'],
                 course=event['course']['fullname'],
-                course_id=event['course']['id'],
+                course_url=f'https://{self.credentials.server}/course/view.php?id={event["course"]["id"]}',
                 platform=self.credentials.server,
                 url=event['url']
             ))

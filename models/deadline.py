@@ -1,5 +1,8 @@
 from dataclasses import dataclass
+from datetime import datetime
 from json import JSONEncoder
+from tkinter import E
+from typing import Dict, List
 
 
 @dataclass
@@ -17,8 +20,8 @@ class Deadline:
     # Course to which the deadline belongs
     course: str
 
-    # Course ID
-    course_id: int
+    # Course link
+    course_url: str
 
     # Platform that the course is on
     platform: str
@@ -43,3 +46,41 @@ class DeadlineEnc(JSONEncoder):
                 'url': o.url
             }
         return JSONEncoder.default(self, o)
+
+
+def sort_deadlines(raw_deadlines: List[Deadline]) -> Dict[str, any]:
+    # Sort deadlines by date, and then by course
+    deadlines = {}
+    for deadline in raw_deadlines:
+        # Parse date from Unix timestamp
+        if deadline.timestamp != 0:
+            parsed_date = datetime.utcfromtimestamp(deadline.timestamp)
+            parsed_date_str = parsed_date.strftime('%Y-%m-%d')
+        else:
+            parsed_date_str = '0'
+
+        # Add date to dict if not existing
+        if not parsed_date_str in deadlines.keys():
+            deadlines[parsed_date_str] = {}
+        
+        # Add course to dict under date if not existing
+        if not deadline.course in deadlines[parsed_date_str].keys():
+            deadlines[parsed_date_str][deadline.course] = {
+                'name': deadline.course,
+                'url': deadline.course_url,
+                'deadlines': []
+            }
+        
+        # Add deadline to dict under course
+        deadlines[parsed_date_str][deadline.course]['deadlines'].append({
+            'name': deadline.name,
+            'url': deadline.url,
+            'timestamp': deadline.timestamp
+        })
+    
+    # Sort deadlines per course by timestamp
+    for date in deadlines.keys():
+        for course in deadlines[date].keys():
+            deadlines[date][course]['deadlines'].sort(key=lambda x: x['timestamp'])
+    
+    return deadlines
