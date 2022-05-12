@@ -48,7 +48,7 @@ def weather_before_request():
 @weather.route('/weather')
 def weather_route():
     # Get user IP address and time of day
-    ip_address = request.headers.get('X-Real-IP')
+    ip_address = request.headers.get('X-Real-Ip')
     time_of_day = request.args.get('timeOfDay')
     icon_index = 1 if time_of_day == 'day' else 2
 
