@@ -1,0 +1,60 @@
+nav .navbar-brand > img {
+    height: 2rem;
+    width: auto;
+    filter: saturate(0);
+}
+
+nav .nav-item.active a {
+    color: #20BF55 !important;
+    border-bottom: #20BF55 solid 2px;
+    font-weight: 700;
+}
+
+#hero, #pitch, #opensource, #footer {
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+#hero {
+    padding-bottom: 4rem;
+}
+
+#hero .hero-text a {
+    display: inline-block;
+    background-color: #20BF55;
+    font-weight: bold;
+    padding: 1rem 1.5rem;
+    border-radius: 500px;
+    color: white;
+    margin-top: 1.5rem;
+    will-change: background-color;
+    transition: background-color 200ms ease;
+}
+
+#hero .hero-text a:hover {
+    text-decoration: none;
+    background-color: #137a35; 
+}
+
+#pitch, #opensource, #footer {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+#pitch {
+    background-color: #f2f2f2;
+}
+
+#opensource {
+    background-color: #e0e7e3;
+}
+
+#footer {
+    background-color: #22442d;
+    color: white;
+}
+
+#footer img {
+    filter: invert();
+    height: 2.5rem;
+}

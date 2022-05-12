@@ -1,51 +1,88 @@
 {% extends "base.html" %}
 
 {% block head %}
-<link href="{{ url_for('static', filename='styles/index.css') }}" rel="stylesheet">
+<link href="{{ url_for('static', filename='styles/homepage.css') }}" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-<div class="head">
-    <img style="padding-top: 1%; padding-left: 1%; height: 35px"
-        src="{{ url_for('static', filename='images/logo-2x.png')}}">
-        <span id="logo">GoVL&#234;</span>
-        <span><a id="login" href="{{ url_for('login.login_page') }}"><u>Log in or register ↗</u></a></span>
-</div>
-<div class="body">
-    <img style="padding-right: 150px; height: 400px;" id="illus"
-        src="{{ url_for('static', filename='images/home-illus.png') }}">
-        <div class="quote" >
-            <span>All your classes in</span>
-            <br>
-            <span style="margin: 0; text-align: left;">one place</span>
-            <br>
-            <span><a href="{{ url_for('login.login_page') }}" role="button" class="btn btn-lg btn-success">Get started</a>
-            </span>
+<nav class="px-3 navbar navbar-expand-lg navbar-light">
+    <a class="ml-3 navbar-brand" href="{{ url_for('dashboard.dashboard_page') }}">
+        <img src="{{ url_for('static', filename='images/logo-2x.png') }}"
+            class="d-inline-block align-top mr-2"
+            alt="GoVL&#234;">
+        <strong>GoVL&#234;</strong>
+    </a>
+    <a class="ml-auto nav-link"
+        href="https://github.com/govle-192-21-2/govle"
+        rel="noopener" target="_blank">View on GitHub &nearr;</a>
+</nav>
+
+<div class="container-fluid mt-4">
+    <div class="row text-center" id="hero">
+        <div class="col">
+            <img class="mw-100"
+                src="{{ url_for('static', filename='images/meditating.svg') }}" alt="meditating">
+            <div class="hero-text mt-4">
+                <h1>All your classes, in one place.</h1>
+                <a href="{{ url_for('login.login_page') }}" role="button">Sign in or register &rarr;</a>
+            </div>
         </div>
-</div>
-<div class="block">
-    <table>
-        <tbody>
-            <tr id="column">
-                <th>Lorem ipsum</th>
-                <th>Nunc efficitur</th>
-            </tr>
-            <tr id="row">
-                <td>dolor sit amet, consectetur
-                    adipiscing elit. Praesent ac tempor arcu, eget pulvinar
-                    velit. Aliquam erat volutpat. Pellentesque nulla mi,
-                    sodales nec purus sit amet, ornare euismod dolor.
-                    Pellentesque lobortis tortor imperdiet, volutpat quam a,
-                    commodo orci. Fusce sit amet tincidunt turpis.
-                <td>Lorem id libero interdum
-                    accumsan. Sed ligula arcu, vestibulum vel nulla non,
-                    tempor ultrices lacus. Proin facilisis ex odio.
-                    Maecenas eu turpis non nisl efficitur volutpat ut
-                    eleifend lectus. Nunc vel feugiat nunc, eget rhoncus
-                    risus. Sed at bibendum dolor, eget sodales quam.
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    </div>
+    <div class="row" id="pitch">
+        <div class="offset-lg-1 col-lg-4 col-12 text-center">
+            <img class="mw-100 my-4"
+                src="{{ url_for('static', filename='images/clumsy.svg') }}"
+                alt="clumsy person with papers">
+            <h3 class="my-4">Bringing platforms together...</h3>
+            <p>
+                GoVL&#234; was born out of a need to keep track of classes across different online learning platforms,
+                brought about by the shift to remote learning during the pandemic.<br><br>
+                With GoVL&#234;, you get a bird's-eye view of your classes from both Google Classroom and UVL&#234;,
+                hence the name GoVL&#234;.
+            </p>
+        </div>
+        <div class="offset-lg-2 col-lg-4 col-12 text-center">
+            <img class="mw-100 my-4"
+                src="{{ url_for('static', filename='images/unboxing.svg') }}"
+                alt="unboxing">
+            <h3 class="my-4">...privately and securely</h3>
+            <p>
+                We know how annoying it is to have yet another password to generate or remember,
+                so we made it easy to log in to GoVL&#234;: just log in with your University of the Philippines
+                Google account.<br><br>
+                Your Google Classroom and UVL&#234; credentials are never stored in our database, and your UVL&#234;
+                password is protected before transmission with 4,096-bit RSA encryption.
+            </p>
+        </div>
+    </div>
+    <div class="row align-items-center" id="opensource">
+        <div class="col-lg-4 col-12">
+            <h3>Open source,<br>powered by open-source</h3>
+        </div>
+        <div class="col-lg-4 col-12 text-center">
+            <img class="mw-100"
+                src="{{ url_for('static', filename='images/loving.svg') }}"
+                alt="loving">
+        </div>
+        <div class="col-lg-4 col-12">
+            <p>
+                GoVL&#234; is completely open-source, and it cannot exist without other amazing open-source
+                technologies.<br><br>
+                The website is deployed directly and instantly from our GitHub repository, so you can be sure
+                that updates are fast and authentic.
+            </p>
+        </div>
+    </div>
+    <div class="row text-center" id="footer">
+        <div class="col">
+            <img class="mb-4"
+                src="{{ url_for('static', filename='images/logo.png') }}"
+                alt="GoVL&#234;">
+            <p class="mb-0"><strong>Made with &heartsuit; in 2022 by</strong></p>
+            <p>Coleen Crisostomo, Jared Dantis, JC Peroz, Lee Monique Sadang</p>
+            <p>Licensed under the MIT License</p>
+            <p>Illustrations used under the CC0 license from <a class="text-light" href="https://www.opendoodles.com/">OpenDoodles</a></p>
+        </div>
+    </div>
 </div>
 {% endblock %}
