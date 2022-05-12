@@ -3,6 +3,7 @@ from flask import Blueprint, current_app, redirect, url_for
 from flask_login import login_required, current_user
 from json import dumps
 from models.credentials import GoogleCredentials
+from models.deadline import DeadlineEnc
 from models.learning_env_class import LearningEnvClassEnc
 
 gclass = Blueprint('gclass', __name__)
@@ -49,4 +50,4 @@ def gclass_coursework():
     
     # The coursework is returned as a list of GoogleCoursework dataclass instances,
     # so we need to serialize them to JSON.
-    return dumps(all_coursework)
+    return dumps(all_coursework, cls=DeadlineEnc)
