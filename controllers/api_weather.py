@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, current_app, request
 from flask_login import login_required
 from json import dumps
 from requests import get
@@ -47,8 +47,18 @@ def weather_before_request():
 
 @weather.route('/weather')
 def weather_route():
+    # Return dummy data if running in development mode
+    if current_app.config['DEBUG'] or 'HTTP_X-Real-IP' not in request.environ:
+        return dumps({
+            'condition': 'Clear',
+            'icon': 'day-sunny',
+            'temperature': '-10',
+            'place': 'London (dummy data)',
+            'feels_like': '-9'
+        })
+
     # Get user IP address and time of day
-    ip_address = request.headers.get('X-Real-Ip')
+    ip_address = request.environ['HTTP_X-Real-IP']
     time_of_day = request.args.get('timeOfDay')
     icon_index = 1 if time_of_day == 'day' else 2
 
