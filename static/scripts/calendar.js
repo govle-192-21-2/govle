@@ -22,32 +22,18 @@ const months = [
     "December"
 ]
 
-fetch('/api/v1/moodle/deadlines').then(response => response.json())
-  .then(uvle_deadlines => {
-      console.log(uvle_deadlines);
-  });
-
-
-fetch('/api/v1/google/coursework').then(response => response.json())
-  .then(google_deadlines => {
-      console.log(google_deadlines);
-  });
-
-
-getCalendarCurrent(days);
+var uvle_deadlines_list = []
 
 
 function getPreviousMonth(days){
   days.setMonth(days.getMonth()-2);
   //change year if ganito
-  console.log(days);
   getCalendarCurrent(days);
  }
  
 function getNextMonth(days){
-   days.setMonth(days.getMonth()+1);
-   console.log(days);
-   //change year if ganito
+   days.setMonth(days.getMonth());
+      //change year if ganito
    getCalendarCurrent(days);
  }
 
@@ -63,8 +49,14 @@ for (let i = 0; i < days.getDay(); i++) {
 
 while (days.getMonth() == month) {
     table += '<td>' + '<div class = "calendar-numbers">' + days.getDate() + '</div>';
-    if (days.getMonth() == 4 && days.getDate() == 30){
-      table += '<div class = "uvle-box"> <b>CS 150</b> Deadline</div>';
+    for (let dates of uvle_deadlines_list){
+      console.log(dates);
+      //if (days.getMonth() == month && days.getDate() == dates[0]){
+        //for (deadline_for_the_day in dates){
+        //table += `<div class = "uvle-box"> <b>${dates[1]}</b> ${deadline_for_the_day}</div>`;
+        //table += '<br>'
+      //}
+      
     }
     table += '</td>';
     if (days.getDay() % 6 == 0 && days.getDay() != 0) { 
@@ -82,11 +74,47 @@ if (days.getDay() != 0) {
   // close the table
 table += '</tr></table>';
 
-
-
 document.querySelector('tbody').innerHTML = table;
 }
 
 //get classes from UVLE and google classroom
 //if UVLE red if GClass green
 //
+
+$(document).ready(() => {
+  fetch('/api/v1/moodle/deadlines').then(response => response.json())
+    .then(uvle_deadlines => {
+      for (let date in uvle_deadlines){
+        const date_split = date.split('-');
+        const deadline_month = months[parseInt(date_split[1]) - 1];
+        const day = date_split[2];
+        list = [];
+        list.push(day);
+        if (deadline_month == months[days.getMonth()-1]){;
+        for (let subjects in uvle_deadlines[date]){
+          list.push(subjects);
+          for (let deadline_names in uvle_deadlines[date][subjects].deadlines){
+            deadline_list = [];
+            deadline_list.push(((uvle_deadlines[date][subjects].deadlines)[deadline_names]).name);
+            
+          }
+          
+          list.push(deadline_list);
+        }
+        uvle_deadlines_list.push(list);
+        }
+      }
+
+ 
+      });
+  
+  
+  
+  fetch('/api/v1/google/coursework').then(response => response.json())
+    .then(google_deadlines => {
+        //console.log(google_deadlines);
+    });
+
+    getCalendarCurrent(days); 
+  
+  });
