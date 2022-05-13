@@ -16,7 +16,7 @@ def moodle_before_request():
     # Check if user has Moodle credentials
     if len(current_user.moodle_account.password) == 0:
         # Redirect to Moodle account linking page
-        return redirect(url_for('link_moodle.link_moodle_page'))
+        return redirect(url_for('link-moodle.link_moodle_page'))
 
 # Create client if it doesn't exist yet
 def create_moodle_client(creds: MoodleCredentials) -> MoodleClient:
