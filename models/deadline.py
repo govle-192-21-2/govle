@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
 from json import JSONEncoder
-from tkinter import E
 from typing import Dict, List
 
 
