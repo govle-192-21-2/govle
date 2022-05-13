@@ -11,6 +11,7 @@
 <style>
 table {
   border-collapse: collapse;
+  table-layout: fixed;
   width: 70%;
 }
 
@@ -53,22 +54,59 @@ th {
 
 td {
   padding: 0px 0px 60px;
-  text-align: center;
   border-bottom: 1px solid #ddd;
-  font-weight: bold;
+  word-wrap: break-word;
+}
+
+.calendar-numbers{
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 5px;
 }
 
 h2, p {
   text-align: center;
 
 }
+
+.uvle-box {
+    background-color: #C81A2F;
+    border-radius: 5px;
+    color: #ddd;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 0;
+    padding: 2.5px 2.5px 2.5px 2.5px;
+    position: absolute;
+    width: 110px;
+}
+
+.google-box {
+    background-color: #199A44;
+    border-radius: 5px;
+    color: #ddd;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 0;
+    padding: 2.5px 2.5px 2.5px 2.5px;
+    position: absolute;
+    width: 110px;
+}
+
+.leftbutton:hover, .rightbutton:hover{
+    color:#6D6D6D
+}
+
+.leftbutton:active, .rightbutton:active{
+    color:#C81A2F
+}
 </style>
 <body>
     <div class = 'flex-container'  style = "gap: 270px;">
-        <span style = "font-size: 35px">&#10094</span>
+        <span class = "leftbutton", style = "font-size: 35px", onclick="getPreviousMonth(days)">&#10094</span>
         <h2>
         </h2>
-        <span style = "font-size: 35px">&#10095</span>
+        <span class = "rightbutton", style = "font-size: 35px", onclick="getNextMonth(days)">&#10095</span>
     </div>
     <div class = 'flex-container', style = "gap: 10px; padding: 18px;">
         <div class = 'rectangle_red', style = "order: 1;"></div>
