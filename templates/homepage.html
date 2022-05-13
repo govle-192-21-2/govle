@@ -20,8 +20,10 @@
 <div class="container-fluid mt-4">
     <div class="row text-center" id="hero">
         <div class="col">
-            <img class="mw-100"
-                src="{{ url_for('static', filename='images/meditating.svg') }}" alt="meditating">
+            <div class="hero-img">
+                <img class="mw-100"
+                    src="{{ url_for('static', filename='images/meditating.svg') }}" alt="meditating">
+            </div>
             <div class="hero-text mt-4">
                 <h1>All your classes, in one place.</h1>
                 <a href="{{ url_for('login.login_page') }}" role="button">Sign in or register &rarr;</a>
