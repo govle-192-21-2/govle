@@ -48,6 +48,19 @@ $(document).ready(() => {
                 account_list.append(linked_google);
             }
         });
+    
+    // Listen to account deletion click event
+    $('#confirm-delete').click(() => {
+        fetch('/api/v1/settings/delete_account', { 'method': 'POST' })
+            .then(response => response.json())
+            .then(response => {
+                if (response.success === true) {
+                    window.location.href = '/';
+                } else {
+                    alert(response.error);
+                }
+            });
+    });
 });
 
 const unlink_account = (type, id) => {

@@ -1,5 +1,5 @@
 from flask import Blueprint, current_app, request
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, logout_user
 from hashlib import md5
 from json import dumps
 
@@ -65,3 +65,14 @@ def unlink_page():
         return '{"success": true, "type": "moodle"}', 200
     
     return '{"success": false, "error": "Unknown account type"}', 400
+
+@govle_settings.route('/settings/delete_account', methods=['POST'])
+@login_required
+def delete_account_page():
+    # Delete user from database
+    db = current_app.config['DB']
+    db.delete_user(current_user.user_id)
+
+    # Logout
+    logout_user()
+    return '{"success": true}', 200

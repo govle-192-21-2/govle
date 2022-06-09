@@ -32,6 +32,14 @@ class Database:
         """
         self.root.child(f'users/{user.user_id}').set(asdict(user))
     
+    def delete_user(self, user_id: str):
+        """
+        Deletes a user from the database.
+
+        :param user_id: User ID (string)
+        """
+        self.root.child(f'users/{user_id}').delete()
+    
     def delete_user_google_creds(self, user_id: str, google_account_id: str):
         """
         Deletes a user's Google credentials.
