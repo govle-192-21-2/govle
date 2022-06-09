@@ -1,18 +1,13 @@
 const LinkedAccount = (username, img_url, type) => `
-    <div class="row">
-        <div class="col-md-2 mr-4">
-            <img src="${img_url}" alt="${username}" width="125">
+    <div class="row linked-account mb-4">
+        <div class="col-4">
+            <img src="${img_url}" alt="${username}" class="w-100">
         </div>
-        <div class="col-md-6">
+        <div class="col-8">
             <h4>${username}</h4>
             <p class="text-dark">${type}</p>
             <a class="p" href="#">Disconnect account...</a>
         </div>
-    </div>
-    
-    <div class="row w-100" style="height: 10px;">
-        <br>
-        <hr>
     </div>
 </div>
 `;
