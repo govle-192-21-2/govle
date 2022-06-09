@@ -30,8 +30,8 @@ const buildDeadlineList = (rawDeadlineList) => {
         // Merge both deadline lists
         mergedDeadlineList = Object.assign({}, rawDeadlineList[0], rawDeadlineList[1]);
     
-        // Empty deadlines container
-        $('#deadlines-container').empty();
+        // Remove spinner
+        $('#deadlines-container .spinner-border').remove();
     }
 
     // Iterate through each date
@@ -108,9 +108,21 @@ $(document).ready(() => {
     // Get list of deadlines from API
     let deadlines = [];
     fetch('/api/v1/moodle/deadlines').then(response => response.json())
-        .then(moodle_deadlines => deadlines.push(moodle_deadlines))
+        .then(moodle_deadlines => {
+            // If the dict is empty, display a message saying so.
+            if (Object.keys(moodle_deadlines).length === 0) {
+                $('#deadlines-container').append(`<p class="text-center">No deadlines from UVL&#234;.</p>`);
+            }
+            deadlines.push(moodle_deadlines);
+        })
         .then(() => buildDeadlineList(deadlines));
     fetch('/api/v1/google/coursework').then(response => response.json())
-        .then(google_deadlines => deadlines.push(google_deadlines))
+        .then(google_deadlines => {
+            // If the list is empty, display a message saying so.
+            if (Object.keys(google_deadlines).length === 0) {
+                $('#deadlines-container').append(`<p class="text-center">No deadlines from Google Classroom.</p>`);
+            }
+            deadlines.push(google_deadlines)
+        })
         .then(() => buildDeadlineList(deadlines));
 });
