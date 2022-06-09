@@ -19,6 +19,7 @@ def dashboard_page():
     # Check if we are returning from account linking process
     if 'link_type' in session:
         # User is returning from account linking process
+        del session['link_type']
         return render_template('dashboard.html',
                                active_nav='home',
                                link_type=session['link_type'],
