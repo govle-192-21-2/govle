@@ -19,11 +19,14 @@ def dashboard_page():
     # Check if we are returning from account linking process
     if 'link_type' in session:
         # User is returning from account linking process
+        link_type = session['link_type']
+        link_status = session['link_status']
         del session['link_type']
+        del session['link_status']
         return render_template('dashboard.html',
                                active_nav='home',
-                               link_type=session['link_type'],
-                               link_status=session['link_status'],
+                               link_type=link_type,
+                               link_status=link_status,
                                incomplete_google=incomplete_google,
                                incomplete_moodle=incomplete_moodle)
 
